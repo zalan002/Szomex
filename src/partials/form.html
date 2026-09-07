@@ -1,0 +1,19 @@
+<form class="sz-form" data-lead-form data-clarity-mask="true" data-kind="{{FORM_KIND}}" action="/api/lead" method="post">
+  <div class="form-grid">
+    <label>Neved <span aria-hidden="true">*</span><input name="name" autocomplete="name" required minlength="2" maxlength="100"></label>
+    <label>E-mail-címed <span aria-hidden="true">*</span><input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+    <label>Telefonszámod<input name="phone" type="tel" autocomplete="tel" maxlength="30"></label>
+    <label class="stairs-only">Település<input name="city" autocomplete="address-level2" maxlength="100"></label>
+    <label class="stairs-only">Hány lépcsőfokhoz keresel anyagot?<input name="steps" type="number" min="1" max="300" inputmode="numeric" placeholder="Pl. 16"></label>
+    <label class="stairs-only">Mikor lenne szükséged rá?<select name="timeline"><option value="">Válassz időpontot</option>Amint lehetséges</option><option>1–3 hónapon belül</option><option>3 hónapnál később</option><option>Még tervezek</option></select></label>
+    <label class="full">Miben segíthetünk? <span aria-hidden="true">*</span><textarea name="message" rows="4" required minlength="5" maxlength="5000" placeholder="Írd meg a méreteket, a mennyiséget és az elképzelésedet. Ha még nem tudsz pontos méreteket, azt is jelezheted."></textarea></label>
+  </div>
+  <div class="hp" aria-hidden="true"><label>Weboldal<input name="website" tabindex="-1" autocomplete="off"></label></div>
+  <label class="check stairs-only"><input type="checkbox" name="materialOnly" value="yes"><span>Tudomásul veszem, hogy a SZOMEX Kft. az alapanyagot biztosítja; a felmérést és a beszerelést saját szakemberrel intézem.</span></label>
+  <label class="check"><input type="checkbox" name="privacy" value="yes" required><span>Elolvastam az <a href="/adatkezeles" target="_blank" rel="noopener">adatkezelési tájékoztatót</a>, és kérem, hogy az ajánlatkérésemmel kapcsolatban keressetek meg. <span aria-hidden="true">*</span></span></label>
+  <div data-turnstile></div>
+  <button class="button form-submit" type="submit">Ajánlatot kérek <span aria-hidden="true">↗</span></button>
+  <p class="form-note">Az ajánlatkérés nem jár vásárlási kötelezettséggel.</p>
+  <p class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+  <noscript>Az online küldéshez engedélyezd a JavaScriptet, vagy írj a <a href="mailto:taborfalva@szomex.hu">taborfalva@szomex.hu</a> címre.</noscript>
+</form>

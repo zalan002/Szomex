@@ -1,0 +1,7 @@
+{
+  "mode": "built-in image_gen edit",
+  "file": "facebook-story-oak-v2.png",
+  "source": "facebook-story-oak.png",
+  "prompt": "Edit this finished Hungarian Facebook story advert to improve social overlay safe margins only. Keep the 9:16 composition, cream and deep forest green palette, same beautiful oak staircase photo and all five exact text items with identical wording and accents. Put every visible text item inside the central safe area: leave the top 12% of the entire canvas completely empty cream, and leave the bottom 14% completely empty deep green. Reduce the oversized three-line headline a little, preserving elegant serif style. Headline begins below the empty top area and ends around 31% of total height. Photo runs roughly 33%-63%, with a beautiful generous width. The green lower panel begins around 61%; the two sentences and button and URL must all fit between 65% and 85% total height. The URL must be clearly readable above the bottom 14% blank green safe area. Exact text: \"TÖLGYFA LÉPCSŐT TERVEZEL?\" \"Az alapanyagot mi adjuk.\" \"Beszerelést nem vállalunk.\" \"Kérj ajánlatot!\" \"tolgyalapanyag.hu/lepcso\". Keep text large enough to read on a phone. No added text, no new logos, no change to image subject, no mockup.",
+  "qa": "Inspected visually: exact Hungarian copy and URL; clear top and bottom safe margins; natural oak stairs."
+}

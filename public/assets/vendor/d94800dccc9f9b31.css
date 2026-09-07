@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/vendor/42377190eb37561b.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/vendor/f2881a772fe057b3.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/vendor/f613ac3481de29c1.ttf") format('truetype');
+}

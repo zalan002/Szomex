@@ -1,0 +1,704 @@
+[
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk5hkWV4exQ.ttf",
+    "path": "/assets/vendor/71636995c33f25a3.ttf",
+    "bytes": 52848,
+    "sha256": "4080f1786e221d3bfbb5685e7ff3590ba68992f9a398cff6cc435628dedf63a7"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk8ZkWV4exQ.ttf",
+    "path": "/assets/vendor/5fe05ee7a5b305e3.ttf",
+    "bytes": 52624,
+    "sha256": "785ddf6f8ec58f811e53f9b7a499bce1c223301fdb0e224d1fe2fcb40f5c9848"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkxhjWV4exQ.ttf",
+    "path": "/assets/vendor/b1fa3fa5a501966f.ttf",
+    "bytes": 52680,
+    "sha256": "d5e676f4064dc1dbb8133abb4279ede32dfc77356b925537d2d44038f827f057"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkyFjWV4exQ.ttf",
+    "path": "/assets/vendor/60c54beb00f18efd.ttf",
+    "bytes": 52508,
+    "sha256": "f98c3c5126e27672a9f05cd61f75a0fa189db5709b594453663ce0d6a7c07e3e"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk0ZjWV4exQ.ttf",
+    "path": "/assets/vendor/08d846a8c3c5efde.ttf",
+    "bytes": 52840,
+    "sha256": "3c178643178eae48fcfc256b5c14eccf54901d9c1762b96c85e4934b1a427d9e"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0B4uaVc.ttf",
+    "path": "/assets/vendor/856a6a2879ee4c4d.ttf",
+    "bytes": 51204,
+    "sha256": "68ef847d11a35fa493ff6ceb0e8c7ddef9b100b8619fe195fc542db1dd8f63f6"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4uaVc.ttf",
+    "path": "/assets/vendor/9d415806f0c20390.ttf",
+    "bytes": 51144,
+    "sha256": "fcd600ea1d85ae0f523d4fba2f1a0a5767b27b1f4d3f17972fafbf5ca67b13f5"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsgH1x4uaVc.ttf",
+    "path": "/assets/vendor/5b476dbd21047931.ttf",
+    "bytes": 51024,
+    "sha256": "e38018a478cd8270dded362d47fa458bdff6d673092b827c0d94e4d3ca5007d3"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1x4uaVc.ttf",
+    "path": "/assets/vendor/2c02c4598e4cb430.ttf",
+    "bytes": 51052,
+    "sha256": "cbd72d35d3e0825dd01ed04972e5e0266f7099dbd355b27a868a83346c8dd317"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/opensans/v44/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgshZ1x4uaVc.ttf",
+    "path": "/assets/vendor/c24de22a15adc0b4.ttf",
+    "bytes": 51356,
+    "sha256": "ba9448e01d0f0820dd889c496a7bdbbe70f63695784ce88ee0f8f9a1f85dd076"
+  },
+  {
+    "source": "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,latin-ext&display=swap",
+    "path": "/assets/vendor/6722c894397c9f5f.css",
+    "bytes": 2010,
+    "sha256": "4d8a07e69c676e9d194a2e5edd519f44baaba82c3ae91cbfd660bc4bf619fd4f"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/et-cache/8/et-divi-dynamic-8.css?ver=1774377046",
+    "path": "/wp-content/et-cache/8/et-divi-dynamic-8.css",
+    "bytes": 39500,
+    "sha256": "edd055f718048593231c1b898f08e0e15fe32dc6fbcb28e0ac4065e5ed04f67b"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/librebaskerville/v24/kmKWZrc3Hgbbcjq75U4uslyuy4kn0qNccR04_RUJeby2OU36SjNDluI.ttf",
+    "path": "/assets/vendor/42377190eb37561b.ttf",
+    "bytes": 102596,
+    "sha256": "813c474b70c1380b0961ba44405d9d9f8d6fca74e07e2fb130ccb9fada457ed4"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/librebaskerville/v24/kmKUZrc3Hgbbcjq75U4uslyuy4kn0olVQ-LglH6T17uj8Q4iAANK.ttf",
+    "path": "/assets/vendor/f2881a772fe057b3.ttf",
+    "bytes": 98600,
+    "sha256": "eb53ac44a432022cf0c60666206ad084dc7880473ccbcbcc5b5f90a75e6002af"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/librebaskerville/v24/kmKUZrc3Hgbbcjq75U4uslyuy4kn0olVQ-LglH6T17ujFgkiAANK.ttf",
+    "path": "/assets/vendor/f613ac3481de29c1.ttf",
+    "bytes": 98636,
+    "sha256": "7eda931ea61f009a950e1a964a410b5b29349ec85d025a555cec9ab7de371e09"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiAyp8kv8JHgFVrJJLmE0tMMPc.ttf",
+    "path": "/assets/vendor/db9a6a39cc7e1bf4.ttf",
+    "bytes": 26888,
+    "sha256": "99429b6550f8b79b5ffffb60e6ceceb75a4d619c1785a55a1030c787ab176398"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmv1pVGdeL.ttf",
+    "path": "/assets/vendor/e1a5ac467d9c56f4.ttf",
+    "bytes": 26820,
+    "sha256": "a074605105650e6af59eba7d62ba16499e97110f220d6cf533c325eac6e5294c"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm21lVGdeL.ttf",
+    "path": "/assets/vendor/dfcbda1160c93387.ttf",
+    "bytes": 26776,
+    "sha256": "85cace7fa45df426a4326a1b903dfc9cbbd06856c73dbc370ba23e602c9b5bcc"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrJJLufntF.ttf",
+    "path": "/assets/vendor/e1e7585bfc534784.ttf",
+    "bytes": 26664,
+    "sha256": "aef29992ce0fbebaaf12aee5018bf16e49a8b97b1bc8a3be55f2e37dc08fb302"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmg1hVGdeL.ttf",
+    "path": "/assets/vendor/ac4dac20b87e8bdc.ttf",
+    "bytes": 26668,
+    "sha256": "fa281e7bc47ea0efaba22995815478ecd4e179192ef7e36f0dbaaff84fb297a4"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmr19VGdeL.ttf",
+    "path": "/assets/vendor/c78ba9cc575e9619.ttf",
+    "bytes": 26672,
+    "sha256": "097f19f2cdbf5991e7d0e8a3dcd766937aefa24cc736bc428fb56c38c9505600"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmy15VGdeL.ttf",
+    "path": "/assets/vendor/8b8ac85f6c94db70.ttf",
+    "bytes": 26352,
+    "sha256": "a7fa62c6db20e9c35b4d6a35338627615af3bfd3d8179a90b31cbb33fc72a022"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm111VGdeL.ttf",
+    "path": "/assets/vendor/0381c994b6037926.ttf",
+    "bytes": 26324,
+    "sha256": "e5c754086390c09d57dd06832e8fd37ae8d80aa031a8082f37656f865e8f1c70"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm81xVGdeL.ttf",
+    "path": "/assets/vendor/34c5ea7db4e353fb.ttf",
+    "bytes": 26232,
+    "sha256": "2668f04bcff9e120b543f17f003e6d5ea07e6e7eb266b0ffe17a179b067eb2d0"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrLPTufntF.ttf",
+    "path": "/assets/vendor/6a7883b34d55eca3.ttf",
+    "bytes": 25104,
+    "sha256": "c60c8dbedcf668c364b7a762224fe535a3f37f2f31b31ad60774c7c2a6b0872f"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLFj_Z1JlEA.ttf",
+    "path": "/assets/vendor/0a35c231a54b3d4e.ttf",
+    "bytes": 25020,
+    "sha256": "20c763feee1abd6879c1a65699b7b72c59bfc4d5d2262c98f8c9d62397816b9c"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDz8Z1JlEA.ttf",
+    "path": "/assets/vendor/1e4f7badc829ee5a.ttf",
+    "bytes": 24860,
+    "sha256": "4ead2d553b9adcd68fb0809e7c3a9c21ab792893aae556ca0aa5ac12df84373e"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJnedw.ttf",
+    "path": "/assets/vendor/87878e437069e64b.ttf",
+    "bytes": 24796,
+    "sha256": "8efdf13ee4098475e50358f87321e2d5573bb673196e7c28359c12d8e845ac0f"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLGT9Z1JlEA.ttf",
+    "path": "/assets/vendor/58f0be7d5f69a349.ttf",
+    "bytes": 24768,
+    "sha256": "85bbf9cefad523a3cebd5ead817a6a812b0b969d2a50c23409a93e1eeec75f37"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z1JlEA.ttf",
+    "path": "/assets/vendor/2ede32600570fa1d.ttf",
+    "bytes": 24732,
+    "sha256": "6f6138ec175aace90ec1f0449ebeacc3c45dd8647c7761edff1a53fc83e93e91"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1JlEA.ttf",
+    "path": "/assets/vendor/b6181e68eb53a22b.ttf",
+    "bytes": 24444,
+    "sha256": "cb44ce692b0f214598014fdb2356045aefea47cdc603be619de385fa47dcc091"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4Z1JlEA.ttf",
+    "path": "/assets/vendor/3088874f57eaf03e.ttf",
+    "bytes": 24296,
+    "sha256": "89e7d6aa165bd5320bc535c60fbd310a87c6cf098855477c41b4180727143093"
+  },
+  {
+    "source": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLBT5Z1JlEA.ttf",
+    "path": "/assets/vendor/4090e9607ad2b38c.ttf",
+    "bytes": 24176,
+    "sha256": "e8ef13ef9fefc1690ecab37763ff6f8166f0f2e7ed7e003dd99925cd5e8f1432"
+  },
+  {
+    "source": "https://fonts.googleapis.com/css?family=Libre+Baskerville:regular,italic,700|Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&subset=latin,latin-ext&display=swap",
+    "path": "/assets/vendor/871649aa340cfbbf.css",
+    "bytes": 3705,
+    "sha256": "9dc8498604bb9b774596dc573c9f5abf736195f19e668b43a6f965274a9af1ef"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-22.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-22.png",
+    "bytes": 373,
+    "sha256": "037971bb49260e34fdb989cb016a564ab8ab33653ded4325704d8fde1cb5bc8d"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/et-cache/8/et-core-unified-deferred-8.min.css?ver=1774377047",
+    "path": "/wp-content/et-cache/8/et-core-unified-deferred-8.min.css",
+    "bytes": 15837,
+    "sha256": "292b8120ffd39a4a10b369bb8f491bbd5d53a5066ad13068ff8f931027e6f086"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/05/logopaint2.png",
+    "path": "/wp-content/uploads/2025/05/logopaint2.png",
+    "bytes": 30760,
+    "sha256": "77cc1ad8c27906c51e78716278df966cf843a88d3f883fad1bf5b025ef63740b"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-5.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-5.png",
+    "bytes": 207,
+    "sha256": "bbbdb2fed10da92aca5679e646c047e2735ed655190c23dc0944417c62750a5a"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-5-480x480.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-5-480x480.png",
+    "bytes": 123,
+    "sha256": "ce58d214debaf43e941e0e94d4bc8636dfc373e6a032257751ce4d58f4fc974c"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-6.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-6.png",
+    "bytes": 147,
+    "sha256": "b1441fade29216e8a29096f5d4d4fabc036e433c5fc6e28e08e7eedf68b8ba33"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-6-150x150.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-6-150x150.png",
+    "bytes": 116,
+    "sha256": "c6de7147fcc6ffeb6bee46efd61610cf180697c2f4c52081333eb7a6fdb46b3d"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-8.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-8.png",
+    "bytes": 684,
+    "sha256": "2b696f48aebb6c9784acb8546b0ae3741e2adfb3f1d77f0dd2cd1d1360bb793b"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-8-480x600.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-8-480x600.png",
+    "bytes": 1592,
+    "sha256": "5b4a39216150d55ad1fb47c2bb21ee45e5dbc08ec56abca514a466758df1ba9d"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/1.jpg",
+    "path": "/wp-content/uploads/2025/06/1.jpg",
+    "bytes": 54144,
+    "sha256": "90ee378e7f3c65957100d7ba9111196238987022f7f0c5ce07d0200e23e11d9e"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/1-480x576.jpg",
+    "path": "/wp-content/uploads/2025/06/1-480x576.jpg",
+    "bytes": 58365,
+    "sha256": "6d1d2815da71c8008314f7c03131ac91da166da15e8b98dbfd2629da452284d1"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/2.jpg",
+    "path": "/wp-content/uploads/2025/06/2.jpg",
+    "bytes": 36034,
+    "sha256": "919ce9c9485a3589ccb49674d604daa50c7f82bb00f7c303f2b83240db36d5eb"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/2-480x576.jpg",
+    "path": "/wp-content/uploads/2025/06/2-480x576.jpg",
+    "bytes": 39930,
+    "sha256": "6f07f684495825769dc9ff688fe2ecd83b3599e854cf61ece048e5db91f37ea5"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/3.jpg",
+    "path": "/wp-content/uploads/2025/06/3.jpg",
+    "bytes": 56709,
+    "sha256": "c9961e2d65485f383d5449ea6acade441309cbee7b73e37caf4442d4498f675e"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/3-480x576.jpg",
+    "path": "/wp-content/uploads/2025/06/3-480x576.jpg",
+    "bytes": 60275,
+    "sha256": "1b6247b8b7e038fd2d582749bb86fff374df116ea4c7dac93565c1c8a1fee03b"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/4.jpg",
+    "path": "/wp-content/uploads/2025/06/4.jpg",
+    "bytes": 45694,
+    "sha256": "25cbdbdabaa17da174f30503865e6c09e99c93a18d170049cd8722501d5c35f0"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/4-480x576.jpg",
+    "path": "/wp-content/uploads/2025/06/4-480x576.jpg",
+    "bytes": 49397,
+    "sha256": "111e5094c83bfd2303eebd7d2ce71863810694c5c214809d9c3f29ec125a77e4"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/5.jpg",
+    "path": "/wp-content/uploads/2025/06/5.jpg",
+    "bytes": 43516,
+    "sha256": "ef44e0da907a34a95e9a476fdaea9ea736ee1cb969063a0da7a451c08cd2d096"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/5-480x576.jpg",
+    "path": "/wp-content/uploads/2025/06/5-480x576.jpg",
+    "bytes": 48493,
+    "sha256": "6184b384b692dca8e4a2d8357e507fe22ce5216a5e42740262749280eff713af"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/6.jpg",
+    "path": "/wp-content/uploads/2025/06/6.jpg",
+    "bytes": 27321,
+    "sha256": "7a2e5dccd4f6f3643225c61bd5c2a4815b0fdd0bd2d9045d57c0dd5af086cf4e"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/6-480x576.jpg",
+    "path": "/wp-content/uploads/2025/06/6-480x576.jpg",
+    "bytes": 31853,
+    "sha256": "03a23548c4e1045b32e020c9c4b8572f93b2d672bf28a37822b5d1bc11692bdc"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n.jpg",
+    "path": "/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n.jpg",
+    "bytes": 235399,
+    "sha256": "0997595ff7a5c31327e9e5c1c7979c9e97ad3fccfb911453babd387c7e7bda42"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n-1280x1280.jpg",
+    "path": "/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n-1280x1280.jpg",
+    "bytes": 152176,
+    "sha256": "11c76c867a9f8c85bd9e3a86c2c4031db491a21fa31d50b0eee9eb23a39e0708"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n-980x980.jpg",
+    "path": "/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n-980x980.jpg",
+    "bytes": 103483,
+    "sha256": "57ab74675bcf0609afb72a71399bd9f29fc1f621664169a2a87578b4310b1a4e"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n-480x480.jpg",
+    "path": "/wp-content/uploads/2025/06/480342573_1143370530908498_2671889630751042673_n-480x480.jpg",
+    "bytes": 33677,
+    "sha256": "f9f9f658700db9f55aa117467fa23aec5f9181d9b657bd97f090f05184fc4ef1"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n.jpg",
+    "path": "/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n.jpg",
+    "bytes": 282595,
+    "sha256": "c9267b3c120e1e862e4dadb2711a88d92048114b6ba6344f7cbed84c03da9df2"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n-1280x664.jpg",
+    "path": "/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n-1280x664.jpg",
+    "bytes": 85299,
+    "sha256": "a93b5420ca6b517dd21640f8ee8af539e6fdacf02ebe5e4c1a016e28625baa58"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n-980x508.jpg",
+    "path": "/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n-980x508.jpg",
+    "bytes": 56831,
+    "sha256": "cae1ec2382fa357b10fb501c47555ba8ebd1bdb17e0e07d2634eaa3b7766c232"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n-480x249.jpg",
+    "path": "/wp-content/uploads/2025/06/481251436_1153174833261401_3792649468091947873_n-480x249.jpg",
+    "bytes": 19017,
+    "sha256": "79392faf7f94ebe1ee8050368117eae522a5eee6e38d071a9b55d6f2c746b1b5"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-9.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-9.png",
+    "bytes": 442,
+    "sha256": "d2390817601816eb91d1d9118d8665b5b0f3a4b33afe85d0f73b4e74a7dc67c5"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-9-480x480.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-9-480x480.png",
+    "bytes": 3836,
+    "sha256": "ba2b6e3a051b3badb69156675b0542073f10d9972c4655ef42b959efd42a3556"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n.jpg",
+    "path": "/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n.jpg",
+    "bytes": 212004,
+    "sha256": "40d6d755c370a3b835ac3caa5904e941cdd6e8bfe3f291c7f8e8cfa949a73f01"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517.jpg",
+    "path": "/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517.jpg",
+    "bytes": 234085,
+    "sha256": "518a56ced94123ddf9256b5fb245d0f9739684022efb77a9997e69c70156fb82"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517-1280x720.jpg",
+    "path": "/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517-1280x720.jpg",
+    "bytes": 184281,
+    "sha256": "15e01d7cf50281586180c10b1e2277d59b710f9ad638ed320a4ab71fcd5c279c"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517-980x551.jpg",
+    "path": "/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517-980x551.jpg",
+    "bytes": 115962,
+    "sha256": "0f2547eaf14e69ba2b3b58cea1300e120ebab1a8c3bb91c2200ad3d6b844c802"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517-480x270.jpg",
+    "path": "/wp-content/uploads/2025/06/470232145_1139870374370482_1771317682787265928_n-e1748929967517-480x270.jpg",
+    "bytes": 31229,
+    "sha256": "84fe745d1af59fd2405f30a34e69417698070cf2ea15505249fa899c4cbab5d7"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-31.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-31.png",
+    "bytes": 1314,
+    "sha256": "ecd4d0d0ea3bc97164f7a678bab65162ca25299e702fe9de1f8d0550577b885f"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-31-480x600.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-31-480x600.png",
+    "bytes": 1563,
+    "sha256": "5259213a12af92d8b475a3317d37eb4bab414df366f74c32b403e115baa705aa"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n.jpg",
+    "path": "/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n.jpg",
+    "bytes": 600995,
+    "sha256": "3b9770f87f4f120fa2ac63fc40c172b543ea12bcce60cbb8ae8c8a8e6fc1b118"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n-1280x576.jpg",
+    "path": "/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n-1280x576.jpg",
+    "bytes": 265982,
+    "sha256": "ca9b3e20a0dbc6a5c5945c57ec5031ade03e132abd1d1b88b914ed6366e50666"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n-980x441.jpg",
+    "path": "/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n-980x441.jpg",
+    "bytes": 156132,
+    "sha256": "25ef240c8425f0979af4728c9fd553faddc729fb33eac919d1fd0e9728f39dc0"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n-480x216.jpg",
+    "path": "/wp-content/uploads/2025/06/480247670_1140343767877841_8209583959034521904_n-480x216.jpg",
+    "bytes": 36155,
+    "sha256": "487886e9db9087fc8efe34d03fd1e93abd8c03c0f68107fd51337fe127b9d49d"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-14.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-14.png",
+    "bytes": 307,
+    "sha256": "fa9e0cab4f58f02cbc4950cc9f33b4fd8317fbfac21ce4cd6f0bd67dc3b53d2e"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/civil-engineering-14-300x200.png",
+    "path": "/wp-content/uploads/2025/06/civil-engineering-14-300x200.png",
+    "bytes": 426,
+    "sha256": "bb9a5e8da70e54f5b90aabdf4e4161f677bd1776fef6c2c176dbdb809f1cd968"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-includes/js/jquery/jquery.min.js?ver=3.7.1",
+    "path": "/wp-includes/js/jquery/jquery.min.js",
+    "bytes": 87553,
+    "sha256": "cb6f2d32c49d1c2b25e9ffc9aaafa3f83075346c01bcd4ae6eb187392a4292cf"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1",
+    "path": "/wp-includes/js/jquery/jquery-migrate.min.js",
+    "bytes": 13577,
+    "sha256": "5274f11e6fb32ae0cf2dfb9f8043272865c397a7c4223b4cfa7d50ea52fbde89"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/js/scripts.min.js?ver=4.27.4",
+    "path": "/wp-content/themes/Divi/js/scripts.min.js",
+    "bytes": 274335,
+    "sha256": "ad97778077e648e9c0adbd33005dd7d89fc0313a9b6caef7bf29ed253af8a312"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/includes/builder/feature/dynamic-assets/assets/js/jquery.fitvids.js?ver=4.27.4",
+    "path": "/wp-content/themes/Divi/includes/builder/feature/dynamic-assets/assets/js/jquery.fitvids.js",
+    "bytes": 3349,
+    "sha256": "462747422c6af30aa81a0373fa1cfd736455cef52bdbb816f67be9531d84eace"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/includes/builder/feature/dynamic-assets/assets/js/jquery.mobile.js?ver=4.27.4",
+    "path": "/wp-content/themes/Divi/includes/builder/feature/dynamic-assets/assets/js/jquery.mobile.js",
+    "bytes": 10776,
+    "sha256": "82ccdb280927be0204340a8255ea4f3450fbfc3057b4b8b98f9d0e01814cd143"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/js/common.js?ver=4.27.4",
+    "path": "/wp-content/themes/Divi/core/admin/js/common.js",
+    "bytes": 1343,
+    "sha256": "1ca76922f55b389b8f590ae7e3bcc3a2dccdce3aff1e5a4335af081b76a414ea"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/includes/builder/styles/images/preloader.gif",
+    "path": "/wp-content/themes/Divi/includes/builder/styles/images/preloader.gif",
+    "bytes": 9427,
+    "sha256": "27422f830d71474144ea902369ce78d178d1ace4e38a029ba2e359b7b55b4176"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.eot",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.eot",
+    "bytes": 92172,
+    "sha256": "cf6d04a40db9a4b45f66768418911721fb0bc7f440a0bd08f6bc6c4492ac975c"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.eot?#iefix",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.eot",
+    "bytes": 92172,
+    "sha256": "cf6d04a40db9a4b45f66768418911721fb0bc7f440a0bd08f6bc6c4492ac975c"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.woff",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.woff",
+    "bytes": 92084,
+    "sha256": "fe67b77ac7e0ef4b482dafb86adfa403db1b89a2f337d2dc8bd1278cfe975196"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.ttf",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.ttf",
+    "bytes": 92008,
+    "sha256": "e157a805df2257515250ff4c91e5abde50f7e0d9634946878dbb132159e0e97e"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.svg#ETmodules",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/all/modules.svg",
+    "bytes": 299189,
+    "sha256": "639567f000acf215bbe0bf97270b6ef3db269d1f9245ae2f1dfdcc4e3759315c"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.eot",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.eot",
+    "bytes": 34350,
+    "sha256": "f9853ad337d523c0b35fe7ac306268a7035ce0ff7624710ed8b39c2b88b20a33"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.eot?#iefix",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.eot",
+    "bytes": 34350,
+    "sha256": "f9853ad337d523c0b35fe7ac306268a7035ce0ff7624710ed8b39c2b88b20a33"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.woff2",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.woff2",
+    "bytes": 13548,
+    "sha256": "ce20ed8a323117c8a718ff1ddc6dabb997373b575a8e896f2bf02b846c082c9d"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.woff",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.woff",
+    "bytes": 16772,
+    "sha256": "6799c999e422710f40f70a60a6138fc38106226c44d7bd1b1023f5bb65befef9"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.ttf",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.ttf",
+    "bytes": 34052,
+    "sha256": "5e811f0b32d488b9a183b77cfc7ac1ef44b3ea7aaed014e83975dfe597d221f6"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.svg#fontawesome",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-regular-400.svg",
+    "bytes": 144714,
+    "sha256": "d42a64dc349a98075e8be12587943f2bd52065a8bb18960d7dc7390b535117e0"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.eot",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.eot",
+    "bytes": 204814,
+    "sha256": "e0e3c4af28348d721f8af603595c15d273a56f2b03392f9a413255fe5635f536"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.eot?#iefix",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.eot",
+    "bytes": 204814,
+    "sha256": "e0e3c4af28348d721f8af603595c15d273a56f2b03392f9a413255fe5635f536"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.woff2",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.woff2",
+    "bytes": 80300,
+    "sha256": "6b555920e358f8a25a422988b448615c33bcccb4f932e8331cebfc8e2a737fc7"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.woff",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.woff",
+    "bytes": 104280,
+    "sha256": "aab971ade1633ab836222074ceae0aad8a082d900908f27491b221d6e83998ca"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.ttf",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.ttf",
+    "bytes": 204528,
+    "sha256": "2caded242c04139761742fe0cda7f6592df1b6686857532c8a7c2e2536b976e4"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.svg#fontawesome",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-solid-900.svg",
+    "bytes": 917575,
+    "sha256": "1a46e780ce5beb6507d62af8b20a92b33c8f042e87c612f4bbf8330bfc353419"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.eot",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.eot",
+    "bytes": 136822,
+    "sha256": "6128dd44fed3a046ff8d835d677e0a837c70c64dc1c944b7edfde04eb8d8b879"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.eot?#iefix",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.eot",
+    "bytes": 136822,
+    "sha256": "6128dd44fed3a046ff8d835d677e0a837c70c64dc1c944b7edfde04eb8d8b879"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.woff2",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.woff2",
+    "bytes": 78460,
+    "sha256": "71b3ce72680f4183d28db86b184542051fd533bb1146933233e4f6a20cf98cba"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.woff",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.woff",
+    "bytes": 92136,
+    "sha256": "a0375c054a0041bd58e2a0bf7fa3df7c3904bfc4f790fd24e32ff3ee70fd0eef"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.ttf",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.ttf",
+    "bytes": 136516,
+    "sha256": "404d6083193e569bc5c28c7b1bc0e13ece80c6e0f5a50ad8e9633f48f3c09155"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.svg#fontawesome",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/fontawesome/fa-brands-400.svg",
+    "bytes": 747545,
+    "sha256": "e2749cb24a77208abdd9fda35f0d14f091948c44d21f977c8048a3b13e4beccb"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/uploads/2025/06/borito.jpg",
+    "path": "/wp-content/uploads/2025/06/borito.jpg",
+    "bytes": 384072,
+    "sha256": "0b34e71dee491d1d0cc1d6e0b3fcac9d729aef61252998c091ac56361fe1e769"
+  },
+  {
+    "source": "https://fonts.googleapis.com/css?family=Libre+Baskerville:regular,italic,700&subset=latin,latin-ext&display=swap",
+    "path": "/assets/vendor/d94800dccc9f9b31.css",
+    "bytes": 555,
+    "sha256": "26f0e2689dc3909c3ddb78ecf088df1078d86a25f4155a6c97bebbea3b2d283a"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.eot",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.eot",
+    "bytes": 6248,
+    "sha256": "612e8ce3ec89edee4733f7600a28a7f72821f775b827c8d208b6404ac8bf70bd"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.eot?#iefix",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.eot",
+    "bytes": 6248,
+    "sha256": "612e8ce3ec89edee4733f7600a28a7f72821f775b827c8d208b6404ac8bf70bd"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.woff",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.woff",
+    "bytes": 6152,
+    "sha256": "ef71c937db7d4381cd982493ff9728723d27dd44282cc5adef9e16bc7025ad26"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.ttf",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.ttf",
+    "bytes": 6076,
+    "sha256": "5d875dec046e066cd50a02d75b509b0484831f975e7d4489cc78f65536a73d35"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.svg#ETmodules",
+    "path": "/wp-content/themes/Divi/core/admin/fonts/modules/base/modules.svg",
+    "bytes": 16842,
+    "sha256": "0ae4a16bfea9d30082d75d134739bfe5d80ff9fa0f67b5299660814b9f66d535"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-content/et-cache/global/et-divi-customizer-global.min.css?ver=1748934922",
+    "path": "/wp-content/et-cache/global/et-divi-customizer-global.min.css",
+    "bytes": 1322,
+    "sha256": "b52fd9a336f890563d1dbfe5d21140e7f13c379c5d0d6436b26d156143f68502"
+  },
+  {
+    "source": "https://tolgyalapanyag.hu/wp-includes/js/comment-reply.min.js?ver=7.1",
+    "path": "/wp-includes/js/comment-reply.min.js",
+    "bytes": 2950,
+    "sha256": "f2cc60607c1d407e194dddc628e9fde74e56b9a60c4ba39d6b17a5e2629c83fb"
+  }
+]

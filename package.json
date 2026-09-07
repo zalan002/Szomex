@@ -1,0 +1,21 @@
+{
+  "name": "szomex-tolgyalapanyag",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "audit:source": "node scripts/import-original.mjs",
+    "check": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "cheerio": "1.1.2",
+    "jsdom": "26.1.0",
+    "sharp": "0.35.4"
+  }
+}

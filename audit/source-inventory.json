@@ -1,0 +1,42 @@
+{
+  "capturedAt": "2026-09-07T08:07:12.160Z",
+  "source": "https://tolgyalapanyag.hu",
+  "pages": [
+    {
+      "id": 108,
+      "slug": "koszonooldal",
+      "url": "https://tolgyalapanyag.hu/koszonooldal/",
+      "title": "Köszönőoldal"
+    },
+    {
+      "id": 8,
+      "slug": "8-2",
+      "url": "https://tolgyalapanyag.hu/",
+      "title": "Landing"
+    },
+    {
+      "id": 2,
+      "slug": "sample-page",
+      "url": "https://tolgyalapanyag.hu/sample-page/",
+      "title": "Sample Page"
+    }
+  ],
+  "measurements": {
+    "ga4": "G-5W1XXG6H15",
+    "ads": "AW-16959665415",
+    "gtm": "GTM-T2Z9LF8Z",
+    "meta": null
+  },
+  "forms": [
+    {
+      "id": "101",
+      "fields": [
+        "name",
+        "email",
+        "phone",
+        "message"
+      ],
+      "recipient": "taborfalva@szomex.hu"
+    }
+  ]
+}

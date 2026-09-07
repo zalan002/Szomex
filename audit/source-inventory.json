@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-09-07T08:07:12.160Z",
+  "capturedAt": "2026-09-07T08:07:12.16Z",
   "source": "https://tolgyalapanyag.hu",
   "pages": [
     {
@@ -25,7 +25,9 @@
     "ga4": "G-5W1XXG6H15",
     "ads": "AW-16959665415",
     "gtm": "GTM-T2Z9LF8Z",
-    "meta": null
+    "meta": null,
+    "clarity": "rf8y3ss130",
+    "googleAdsLeadLabel": "wGcRCIuopNIaEIfq_5Y_"
   },
   "forms": [
     {
@@ -38,5 +40,12 @@
       ],
       "recipient": "taborfalva@szomex.hu"
     }
+  ],
+  "importedPublicRoutes": [
+    "/",
+    "/koszonooldal",
+    "/sample-page",
+    "/2025/05/30/hello-world",
+    "/category/uncategorized"
   ]
 }

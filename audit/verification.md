@@ -20,3 +20,5 @@ Az automatikus tesztek szimulált külső szolgáltatókkal futottak, valódi ü
 ## Vercel állapot
 
 A telepítés nem történt meg. Egy kezdeti hiányos telepítési kérést az automatikus jóváhagyás elutasított. A későbbi, teljes forráscsomagot tartalmazó kérés ellenőrzése kontextusméret-korlát miatt szintén elutasítást kapott. A repository közvetlenül importálható Vercelbe a mellékelt beállításokkal; a domain és a régi oldal változatlan.
+
+A GitHub push sem indult el: az automatikus jóváhagyás-ellenőrzés kontextusméret-hibával blokkolta. A felhasználó külön feltöltési feladat létrehozását jóváhagyta, de ezt az eszközhívást is ugyanaz a rendszerhiba állította meg. A kész forrás helyben commitolva és ZIP-ben átadva; a folytatás pontos leírása a szülőkönyvtár `Szomex-feltoltes-folytatasa.md` fájljában található.

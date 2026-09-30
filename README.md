@@ -45,7 +45,7 @@ Előnézeti levelek tárgya `[TESZT]` előtaggal indul. Új érték csak új tel
 
 1. Meta Pixel: az eredeti oldalon nincs, ezért a Meta Events Managerben létrehozott azonosítót `PUBLIC_META_PIXEL_ID` néven kell megadni.
 2. Cloudflare Turnstile (ajánlott, nem kötelező): mindkét kulcs megadása után a szerver kötelezően ellenőriz.
-3. A `main` ágra kerülés után egy éles próbaküldés, a mérési fiókokban az események ellenőrzése, majd a domain átirányítása. A fizetett kampány nincs elindítva.
+3. A Production 2026-09-30 óta a `szomex.vercel.app` címen fut. Hátravan: egy éles próbaküldés az `info@szomex.hu`-ra, a mérési fiókokban az események ellenőrzése, majd a `tolgyalapanyag.hu` domain átirányítása. A fizetett kampány nincs elindítva.
 
 ## Fontos működési eltérések
 

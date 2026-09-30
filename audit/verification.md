@@ -7,7 +7,9 @@
 - Vercel: a `szomex` projektben beállítva a `MAILGUN_API_KEY` (Production/Preview: sensitive), `MAILGUN_DOMAIN`, `MAILGUN_API_BASE`, `LEAD_TO`, `LEAD_BCC` (Production) és `PUBLIC_ENABLE_TRACKING=true` (Production).
 - Valódi próba a `claude/epic-volta-qgo7ja` ág Vercel-előnézetén: az `/api/lead` 200-at adott, az oldal a köszönőoldalra lépett, a vercel.app címen `X-Robots-Tag: noindex, nofollow` érkezett. A Mailgun naplója szerint a `[TESZT]` levél `accepted`, majd `delivered` (250) állapotú lett az előnézeti tesztcímzettnél.
 
-Nem ellenőrzött: Production-telepítés az új kóddal (a `main` ágra kerülés után), kézbesítés az `info@szomex.hu` postafiókba, valamint a Google Ads/GA4 fiókokban a konverziók tényleges beérkezése (fiókhozzáférés nélkül).
+Élesítés: a `main` ág (`0caed8e`) Production-telepítése elkészült („Build complete. Production. Tracking: enabled.”), és a `szomex.vercel.app` címen fut. Ott ellenőrizve: a mérési konfiguráció be van kapcsolva; hozzájárulás előtt nincs külső kérés, elfogadás után GA4, Google Ads és Clarity töltődik; a `gclid` megmarad; a vercel.app címen `noindex` fejléc van; az űrlap-végpont elfogadja a `szomex.vercel.app` eredetet (hiányos kérésre 400, korábban 403), idegen eredetre 403.
+
+Nem ellenőrzött: valódi kézbesítés az `info@szomex.hu` postafiókba (éles próbaküldés nem történt), a Google Ads/GA4 fiókokban a konverziók tényleges beérkezése (fiókhozzáférés nélkül), valamint a `tolgyalapanyag.hu` domain átállítása (nem történt meg).
 
 # Korábbi ellenőrzés – 2026-09-07
 

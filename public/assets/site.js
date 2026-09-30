@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const config=window.SZOMEX_CONFIG||{};
-  const consentKey='szomex-consent-v1';
+  const consentKey='szomex-consent-v1',receiptKey='szomex-receipt',attributionKey='szomex-attribution';
   let consent={analytics:false,marketing:false};
   const memory={};
   function read(store,key){try{return store.getItem(key);}catch{return memory[key]||null;}}
@@ -16,7 +16,11 @@
   const loaded=new Set();
   function script(src,id,onload){if(loaded.has(id))return;loaded.add(id);const s=document.createElement('script');s.async=true;s.src=src;s.id=id;if(onload)s.onload=onload;document.head.append(s);}
   const allowed=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?false:config.trackingEnabled===true;
-  function analyticsUrl(){const url=new URL(location.origin+location.pathname),params=new URLSearchParams(location.search);for(const key of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']){const value=params.get(key);if(value&&/^[\p{L}\p{N}_.{}\- ]{1,150}$/u.test(value))url.searchParams.set(key,value);}return url.href;}
+  const utmKeys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  // Google Ads click IDs must stay in page_location, otherwise GA4 cannot attribute auto-tagged Ads traffic.
+  const adClickKeys=['gclid','gbraid','wbraid','gad_source','gad_campaignid'];
+  const utmValue=v=>typeof v==='string'&&/^[\p{L}\p{N}_.{}\- ]{1,150}$/u.test(v);
+  function analyticsUrl(){const url=new URL(location.origin+location.pathname),params=new URLSearchParams(location.search);for(const key of utmKeys){const value=params.get(key);if(utmValue(value))url.searchParams.set(key,value);}for(const key of adClickKeys){const value=params.get(key);if(value&&/^[A-Za-z0-9_.-]{1,512}$/.test(value))url.searchParams.set(key,value);}return url.href;}
   function cleanCookies(){for(const part of document.cookie.split(';')){const key=part.trim().split('=')[0];if(/^(_ga|_gid|_gat|_gcl|_fbp|_fbc|_clck|_clsk)/.test(key)){for(const domain of ['',location.hostname,'.'+location.hostname,'.tolgyalapanyag.hu'])document.cookie=`${key}=; Max-Age=0; path=/; SameSite=Lax${domain?'; domain='+domain:''}`;}}}
   function activate(){
     window.gtag('consent','update',{analytics_storage:consent.analytics?'granted':'denied',ad_storage:consent.marketing?'granted':'denied',ad_user_data:consent.marketing?'granted':'denied',ad_personalization:consent.marketing?'granted':'denied'});
@@ -33,42 +37,56 @@
       window.fbq('consent','grant');
       if(!loaded.has('meta')){script('https://connect.facebook.net/en_US/fbevents.js','meta');window.fbq('init',config.metaPixelId);window.fbq('track','PageView');if(location.pathname.replace(/\/$/,'')==='/lepcso')window.fbq('track','ViewContent',{content_name:'Tölgyfa lépcső alapanyag',content_category:'alapanyag'});}
     }
+    flushLeadReceipt();
   }
   function track(name,params={}){
-    if(!allowed)return;
-    const safe={page_path:location.pathname,form_type:params.form_type||undefined,placement:params.placement||undefined,event_id:params.event_id||undefined};
-    if(consent.analytics&&config.gaId)window.gtag('event',name,{...safe,send_to:config.gaId});
-    if(name==='generate_lead'&&consent.analytics&&config.gaId)window.gtag('event','form_bekuldes',{...safe,send_to:config.gaId});
-    if(name==='generate_lead'&&consent.marketing){
-      if(window.fbq&&config.metaPixelId)window.fbq('track','Lead',{content_name:params.form_type==='stairs'?'Tölgyfa lépcső alapanyag':'Tölgyfa alapanyag'},{eventID:params.event_id});
-      if(config.adsId&&config.adsLeadLabel)window.gtag('event','conversion',{send_to:`${config.adsId}/${config.adsLeadLabel}`,transaction_id:params.event_id});
-    }
+    if(!allowed||!consent.analytics||!config.gaId)return;
+    window.gtag('event',name,{page_path:params.page_path||location.pathname,form_type:params.form_type||undefined,placement:params.placement||undefined,event_id:params.event_id||undefined,send_to:config.gaId});
+  }
+  // As on the original site, the lead conversion belongs to /koszonooldal: it fires there once per channel,
+  // and only with a fresh receipt of a submission the server accepted. Direct visits and reloads never convert.
+  function flushLeadReceipt(){
+    if(location.pathname.replace(/\/$/,'')!=='/koszonooldal')return;
+    let receipt;try{receipt=JSON.parse(read(sessionStorage,receiptKey)||'null');}catch{receipt=null;}
+    if(!receipt)return;
+    if(typeof receipt.id!=='string'||!(Date.now()-receipt.at<1800000)){remove(sessionStorage,receiptKey);return;}
+    const sent={...receipt.sent},params={form_type:receipt.type,event_id:receipt.id,page_path:receipt.path};
+    if(consent.analytics&&config.gaId&&!sent.ga){track('generate_lead',params);track('form_bekuldes',params);sent.ga=true;}
+    if(consent.marketing&&config.adsId&&config.adsLeadLabel&&!sent.ads){window.gtag('event','conversion',{send_to:`${config.adsId}/${config.adsLeadLabel}`,transaction_id:receipt.id});sent.ads=true;}
+    if(consent.marketing&&config.metaPixelId&&window.fbq&&!sent.meta){window.fbq('track','Lead',{content_name:receipt.type==='stairs'?'Tölgyfa lépcső alapanyag':'Tölgyfa alapanyag'},{eventID:receipt.id});sent.meta=true;}
+    const pending=(config.gaId&&!sent.ga)||(config.adsId&&config.adsLeadLabel&&!sent.ads)||(config.metaPixelId&&!sent.meta);
+    if(pending)write(sessionStorage,receiptKey,JSON.stringify({...receipt,sent}));else remove(sessionStorage,receiptKey);
   }
   const panel=document.createElement('section');panel.className='cookie-panel';panel.setAttribute('aria-label','Sütibeállítások');panel.hidden=true;
   panel.innerHTML='<h2>Te döntesz a sütikről.</h2><p>Az oldal működéséhez szükséges beállításokon túl csak az engedélyeddel használunk látogatottsági és hirdetési mérést. <a href="/adatkezeles">Részletek</a></p><div class="cookie-options" hidden><label><input type="checkbox" name="analytics"> Látogatottság és használat (Google / Clarity)</label><label><input type="checkbox" name="marketing"> Hirdetési mérés (Google / Meta)</label></div><div class="cookie-actions"><button type="button" data-choice="reject">Elutasítom</button><button type="button" data-choice="settings">Beállítom</button><button type="button" data-choice="accept" class="accept">Elfogadom</button></div>';
   document.body.append(panel);
   let panelOpener;
   function showSettings(expanded=false){panelOpener=document.activeElement;panel.hidden=false;panel.querySelector('.cookie-options').hidden=!expanded;panel.querySelector('[name=analytics]').checked=consent.analytics;panel.querySelector('[name=marketing]').checked=consent.marketing;panel.querySelector('[data-choice=settings]').textContent=expanded?'Mentés':'Beállítom';if(expanded)panel.querySelector('input').focus();}
-  function setConsent(next){const revoked=(consent.analytics&&!next.analytics)||(consent.marketing&&!next.marketing);consent=next;write(localStorage,consentKey,JSON.stringify({...next,expires:Date.now()+180*86400000}));activate();if(!next.marketing&&window.fbq)window.fbq('consent','revoke');if(!next.analytics&&window.clarity)window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'denied'});if(revoked){cleanCookies();remove(sessionStorage,'szomex-attribution');}panel.hidden=true;panelOpener?.focus();if(revoked)location.reload();}
+  function setConsent(next){const revoked=(consent.analytics&&!next.analytics)||(consent.marketing&&!next.marketing);consent=next;write(localStorage,consentKey,JSON.stringify({...next,expires:Date.now()+180*86400000}));activate();if(!next.marketing&&window.fbq)window.fbq('consent','revoke');if(!next.analytics&&window.clarity)window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'denied'});if(revoked){cleanCookies();remove(sessionStorage,attributionKey);}panel.hidden=true;panelOpener?.focus();if(revoked)location.reload();}
   panel.addEventListener('click',e=>{const b=e.target.closest('[data-choice]');if(!b)return;const choice=b.dataset.choice;if(choice==='reject')setConsent({analytics:false,marketing:false});if(choice==='accept')setConsent({analytics:true,marketing:true});if(choice==='settings'){if(panel.querySelector('.cookie-options').hidden)showSettings(true);else setConsent({analytics:panel.querySelector('[name=analytics]').checked,marketing:panel.querySelector('[name=marketing]').checked});}});
   if(!saved)showSettings();activate();
   document.querySelectorAll('[data-cookie-settings]').forEach(b=>b.addEventListener('click',()=>showSettings(true)));
   document.querySelectorAll('[data-track]').forEach(a=>a.addEventListener('click',()=>track(a.dataset.track,{placement:location.pathname==='/'?'home':'stairs'})));
   document.querySelectorAll('[data-load-map]').forEach(b=>b.addEventListener('click',()=>{const box=b.closest('.map-consent');const frame=box.nextElementSibling;if(frame?.matches('iframe[data-consent-src]')){frame.src=frame.dataset.consentSrc;box.hidden=true;}}));
+  // Campaign source of the current URL travels with the enquiry (only the source type, never the raw click ID).
+  // Keeping it across pages needs a measurement consent.
   function attribution(){
-    if(!consent.analytics&&!consent.marketing)return {};
     const p=new URLSearchParams(location.search),out={};
-    for(const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']){const val=p.get(k);if(val&&/^[\p{L}\p{N}_.{}\- ]{1,150}$/u.test(val))out[k]=val;}
-    if(Object.keys(out).length)write(sessionStorage,'szomex-attribution',JSON.stringify(out));
-    try{return Object.keys(out).length?out:JSON.parse(read(sessionStorage,'szomex-attribution')||'{}');}catch{return {};}
+    for(const k of utmKeys){const val=p.get(k);if(utmValue(val))out[k]=val;}
+    if(['gclid','gbraid','wbraid'].some(k=>p.get(k)))out.click_source='google_ads';else if(p.get('fbclid'))out.click_source='meta_ads';
+    if(!consent.analytics&&!consent.marketing)return out;
+    if(Object.keys(out).length)write(sessionStorage,attributionKey,JSON.stringify(out));
+    try{return Object.keys(out).length?out:JSON.parse(read(sessionStorage,attributionKey)||'{}');}catch{return {};}
   }
   attribution();
+  // crypto.randomUUID is missing on older Safari (before iOS 15.4); a random v4 UUID keeps the form working there.
+  function uuid(){if(typeof crypto.randomUUID==='function')return crypto.randomUUID();const b=crypto.getRandomValues(new Uint8Array(16));b[6]=b[6]&15|64;b[8]=b[8]&63|128;const h=[...b].map(x=>x.toString(16).padStart(2,'0')).join('');return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`;}
   const forms=[...document.querySelectorAll('[data-lead-form]')];
   function setupChallenge(){if(!config.turnstileSiteKey||!window.turnstile)return;forms.forEach(form=>{const el=form.querySelector('[data-turnstile]');if(el.dataset.widget)return;el.dataset.widget=window.turnstile.render(el,{sitekey:config.turnstileSiteKey,action:'lead',theme:'light'});});}
   if(forms.length&&config.turnstileSiteKey)script('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit','turnstile',setupChallenge);
   forms.forEach(form=>{
     if(form.dataset.kind==='stairs')form.elements.materialOnly.required=true;
-    let started=false,requestId=crypto.randomUUID(),completed=false;
+    let started=false,requestId=uuid(),completed=false;
     form.addEventListener('input',()=>{if(!started){started=true;track('form_start',{form_type:form.dataset.kind});}},{passive:true});
     form.addEventListener('submit',async event=>{
       event.preventDefault();if(completed||!form.reportValidity())return;
@@ -82,8 +100,8 @@
         if(!res.ok||!result.ok)throw new Error(result.message||'Az üzenetet nem sikerült elküldeni. Kérjük, próbáld újra.');
         completed=true;status.classList.add('success');status.textContent=form.dataset.kind==='comment'?'Köszönjük! A hozzászólásodat moderálásra továbbítottuk.':'Köszönjük! Az ajánlatkérésedet fogadtuk. Hamarosan felvesszük veled a kapcsolatot.';status.focus();
         if(form.dataset.kind==='comment'){form.reset();button.textContent='Hozzászólás elküldve';return;}
-        write(sessionStorage,'szomex-receipt',JSON.stringify({id:result.id,at:Date.now()}));
-        track('generate_lead',{form_type:form.dataset.kind,event_id:result.id});form.reset();
+        write(sessionStorage,receiptKey,JSON.stringify({id:result.id,type:form.dataset.kind,path:location.pathname,at:Date.now()}));
+        form.reset();
         setTimeout(()=>location.assign('/koszonooldal'),700);
       }catch(error){
         status.classList.add('error');status.textContent=error.name==='TimeoutError'?'A küldés visszajelzése késik. Próbáld újra ugyanitt, vagy írj a taborfalva@szomex.hu címre.':error.message;status.focus();button.disabled=false;button.innerHTML='Újra megpróbálom ↗';
@@ -92,7 +110,6 @@
       }
     });
   });
-  // A direct visit to the thank-you route never fires a lead conversion.
   const search=document.querySelector('[data-search-results]');
   if(search){const term=(new URLSearchParams(location.search).get('s')||'').trim().slice(0,100);const field=document.querySelector('[name=s]');if(field)field.value=term;const pages=[{title:'Tölgyfa alapanyag – teljes kínálat',url:'/',terms:'tölgy fa alapanyag szomex méret gyártó polc párkány asztallap kapcsolat táborfalva'},{title:'Tölgyfa lépcső alapanyag',url:'/lepcso',terms:'tölgy fa lépcső alapanyag lépcsőlap ajánlat'},{title:'Sample Page',url:'/sample-page',terms:'sample page'},{title:'Hello world!',url:'/2025/05/30/hello-world',terms:'hello world wordpress'}];const hits=term?pages.filter(p=>(p.title+' '+p.terms).toLocaleLowerCase('hu').includes(term.toLocaleLowerCase('hu'))):[];const heading=document.createElement('p');heading.textContent=term?`${hits.length} találat erre: ${term}`:'Írj be egy keresőkifejezést.';search.append(heading);for(const p of hits){const row=document.createElement('p'),a=document.createElement('a');a.href=p.url;a.textContent=p.title;row.append(a);search.append(row);}}
 })();

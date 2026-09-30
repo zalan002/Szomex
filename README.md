@@ -7,8 +7,8 @@ A tolgyalapanyag.hu nyilvános WordPress/Divi oldalának önálló, Vercelre el�
 - Az eredeti főoldal HTML-je, arculata, szövegei, képei, betűkészletei és Divi megjelenési fájljai helyben vannak. A menü, szekcióhivatkozások, GYIK, galéria, kapcsolat és térkép megmaradt.
 - Új `/lepcso`: három generált lépcsőkép, mobilos ajánlatkérés, alapanyag/beszerelés egyértelmű elhatárolása, méret- és időpontkérdések.
 - Köszönőoldal, adatkezelési tájékoztató tervezete, keresés és 404. A régi mintabejegyzés és kategória címei is megmaradtak.
-- Saját Vercel-funkció az űrlapfogadáshoz: szerveroldali validáció, botvédelem, hitelesített e-mail-küldés és ismételt küldések védelme.
-- Meglévő GA4, Google Ads konverzió és Clarity azonosítók; hozzájárulástól függő betöltés. Meta Pixel bekötési pont és Lead esemény.
+- Saját Vercel-funkció az űrlapfogadáshoz: szerveroldali validáció, botvédelem (honeypot, eredetellenőrzés, opcionális Turnstile) és e-mail-küldés **Mailgunnal** (EU-régió, `mg.traininghungary.com`). Címzett: **Szomex Kft. <info@szomex.hu>**, a beérkező érdeklődőkről titkos másolat (`LEAD_BCC`) megy.
+- Az eredeti oldallal azonos GA4 (`G-5W1XXG6H15`), Google Ads (`AW-16959665415`) és Clarity azonosítók. A Google Ads-konverzió (`wGcRCIuopNIaEIfq_5Y_`) és a GA4 `form_bekuldes` az eredetihez hasonlóan a `/koszonooldal` megjelenésekor fut, de csak valódi, elfogadott beküldés után. Hozzájárulástól függő betöltés. Meta Pixel bekötési pont (PageView, ViewContent, Lead) – az eredeti oldalon nincs Pixel, azonosító kell hozzá.
 - `marketing/`: két feed- és egy Story-kreatív, pontos méretű JPG exportok, szövegek, UTM-linkek, induló beállítások és eredménykövető sablon.
 
 ## Indítás helyben
@@ -21,7 +21,7 @@ npm run check
 npm run dev
 ```
 
-Előnézet: `http://localhost:4173`, lépcsőoldal: `http://localhost:4173/lepcso`. A helyi előnézet nem küld marketingmérést. Az online űrlap valódi e-mail-küldési és botvédelmi beállítások nélkül nem jelez sikeres beküldést.
+Előnézet: `http://localhost:4173`, lépcsőoldal: `http://localhost:4173/lepcso`. A helyi előnézet nem küld marketingmérést. Az online űrlap `MAILGUN_API_KEY` nélkül nem jelez sikeres beküldést (503).
 
 ## Vercel telepítés
 
@@ -29,15 +29,23 @@ A `zalan002/Szomex` repository importálható Vercelbe. Framework: **Other**, gy
 
 Másold át a szükséges beállításokat a `.env.example` alapján a Vercel környezeti változói közé. Kulcsot ne írj a GitHub-repositoryba. Élesítés előtt kövesd a [telepítési és átállási útmutatót](docs/atallas.md).
 
-## Éles induláshoz szükséges külső beállítások
+## Vercel környezeti változók (beállítva: 2026-09-30, `szomex` projekt)
 
-1. Resend hitelesített küldődomain + `RESEND_API_KEY`, `LEAD_FROM`. Fogadó: `taborfalva@szomex.hu`.
-2. Cloudflare Turnstile webhelykulcs + titkos kulcs, az éles és tesztdomainekre beállítva.
-3. `PUBLIC_ENABLE_TRACKING=true` az éles környezetben. A Google/Clarity azonosítók és az eredeti űrlapkonverzió címkéje már megvan.
-4. Saját Meta Pixel azonosító a Meta webes mérésekhez; jelenleg nincs megadva.
-5. Egy valódi kézbesítési próba, a mérési fiókokban az események ellenőrzése, majd a domain átirányítása. A fizetett kampány nincs elindítva.
+| Változó | Production | Preview / Development |
+| --- | --- | --- |
+| `MAILGUN_API_KEY` | Csak küldésre, csak az `mg.traininghungary.com` domainre jogosult Mailgun-kulcs („Szomex weboldal urlap”) | ugyanaz |
+| `MAILGUN_DOMAIN`, `MAILGUN_API_BASE` | `mg.traininghungary.com`, `https://api.eu.mailgun.net/v3` | ugyanaz |
+| `LEAD_TO` | `Szomex Kft. <info@szomex.hu>` | a tesztelő saját címe – előnézetből nem megy levél az ügyfélnek |
+| `LEAD_BCC` | a másolatot kérő cím | – |
+| `PUBLIC_ENABLE_TRACKING` | `true` | – (előnézetben a mérés mindig ki van kapcsolva) |
 
-A kód és az automatikus tesztek nem igazolják a külső szolgáltatók beállítását vagy a postafiókba történő tényleges kézbesítést. A domain átállítása nem történt meg.
+Előnézeti levelek tárgya `[TESZT]` előtaggal indul. Új érték csak új telepítéssel él. Részletek: [telepítési és átállási útmutató](docs/atallas.md).
+
+## Ami még külső lépést igényel
+
+1. Meta Pixel: az eredeti oldalon nincs, ezért a Meta Events Managerben létrehozott azonosítót `PUBLIC_META_PIXEL_ID` néven kell megadni.
+2. Cloudflare Turnstile (ajánlott, nem kötelező): mindkét kulcs megadása után a szerver kötelezően ellenőriz.
+3. A `main` ágra kerülés után egy éles próbaküldés, a mérési fiókokban az események ellenőrzése, majd a domain átirányítása. A fizetett kampány nincs elindítva.
 
 ## Fontos működési eltérések
 
@@ -56,7 +64,7 @@ A sütikezelés új, konzervatív megoldás: mérés csak hozzájárulás után.
 | `src/partials/form.html` | Új ajánlatkérő űrlap |
 | `public/assets/site.css`, `site.js` | Új oldal, űrlap, sütikezelés és mérések |
 | `public/wp-content`, `public/wp-includes` | Az eredeti oldal saját példányban tárolt fájljai |
-| `api/lead.js`, `lib/lead.mjs` | Szerveroldali fogadás és e-mail |
+| `api/lead.js`, `lib/lead.mjs` | Szerveroldali fogadás és Mailgun e-mail |
 | `audit/` | Nyilvános források leltára, ellenőrzési nyom |
 | `tests/` | Űrlap, hozzájárulás, konverzió és tartalmi ellenőrzések |
 | `marketing/` | Hirdetési csomag és generálási promptok |

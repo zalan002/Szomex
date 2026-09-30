@@ -1,4 +1,15 @@
-# Ellenőrzés – 2026-09-07
+# Ellenőrzés – 2026-09-30
+
+- `npm run check`: 59/59 sikeres automatikus ellenőrzés (Mailgun-kérés mezői, címzett/Bcc/Reply-To, opcionális Turnstile, Vercel-eredetek, köszönőoldali konverzió csatornánként egyszer, `gclid` megőrzése, kampányforrás a levélben, `randomUUID` nélküli böngésző).
+- Élő tolgyalapanyag.hu újramérése valódi böngészővel: GA4 `G-5W1XXG6H15`, Google Ads `AW-16959665415` minden oldalon; a `/koszonooldal`-on GA4 `form_bekuldes` és a `wGcRCIuopNIaEIfq_5Y_` konverzió; Clarity a GTM-ből. Meta/Facebook Pixel nincs az élő oldalon.
+- Helyi böngészős végigjátszás (Mailgun-utánzattal, a Google/Meta kérések blokkolva): lépcsőoldal → űrlap → `/koszonooldal`; ott egyszer `generate_lead`, `form_bekuldes`, Google Ads `conversion` (`transaction_id`-vel) és Meta `Lead`; újratöltés után semmi. Nincs JavaScript-hiba. Mobil és asztali képernyőkép átnézve; a mobilos sütibanner túl nagy címe javítva.
+- Mailgun: az `mg.traininghungary.com` EU-domain aktív (SPF, DKIM, MX rendben). Létrejött a „Szomex weboldal urlap (mg.traininghungary.com)” nevű, csak küldésre és csak erre a domainre jogosult kulcs; tesztmódú (nem kézbesített) API-hívással ellenőrizve.
+- Vercel: a `szomex` projektben beállítva a `MAILGUN_API_KEY` (Production/Preview: sensitive), `MAILGUN_DOMAIN`, `MAILGUN_API_BASE`, `LEAD_TO`, `LEAD_BCC` (Production) és `PUBLIC_ENABLE_TRACKING=true` (Production).
+- Valódi próba a `claude/epic-volta-qgo7ja` ág Vercel-előnézetén: az `/api/lead` 200-at adott, az oldal a köszönőoldalra lépett, a vercel.app címen `X-Robots-Tag: noindex, nofollow` érkezett. A Mailgun naplója szerint a `[TESZT]` levél `accepted`, majd `delivered` (250) állapotú lett az előnézeti tesztcímzettnél.
+
+Nem ellenőrzött: Production-telepítés az új kóddal (a `main` ágra kerülés után), kézbesítés az `info@szomex.hu` postafiókba, valamint a Google Ads/GA4 fiókokban a konverziók tényleges beérkezése (fiókhozzáférés nélkül).
+
+# Korábbi ellenőrzés – 2026-09-07
 
 - `npm run check`: 44/44 sikeres automatikus ellenőrzés.
 - Függőségek: telepítéskor `npm audit` 0 ismert sérülékenységet jelzett.

@@ -7,6 +7,6 @@ export default async function handler(req,res){
   let body=req.body;
   if(typeof body==='string'){if(Buffer.byteLength(body)>20000)return res.status(413).json({ok:false,message:'Túl hosszú üzenet.'});try{body=JSON.parse(body);}catch{return res.status(400).json({ok:false,message:'Érvénytelen kérés.'});}}
   if(Buffer.byteLength(JSON.stringify(body||{}))>20000)return res.status(413).json({ok:false,message:'Túl hosszú üzenet.'});
-  const result=await processLead({body,origin:req.headers.origin,host:req.headers.host,contentType:req.headers['content-type']});
+  const result=await processLead({body,origin:req.headers.origin,host:req.headers.host,contentType:req.headers['content-type'],ip:String(req.headers['x-forwarded-for']||'').split(',')[0].trim(),userAgent:req.headers['user-agent'],cookie:req.headers.cookie});
   return res.status(result.status).json(result.data);
 }

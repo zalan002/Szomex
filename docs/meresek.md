@@ -14,7 +14,7 @@ Az élő oldal minden oldalon betölti a GA4-et és a Google Ads-taget (`gtag('c
 | Másik GA4 esemény | `ajanlatkeres` | A fenti `/contact/success` szabályhoz tartozott; archív mérési leltárban megőrizve |
 | Google Tag Manager | `GTM-T2Z9LF8Z` | Azonosító és nyilvános konfiguráció leltározva; a tényleges tagokat közvetlenül futtatjuk |
 | Microsoft Clarity | `rf8y3ss130` | Megőrizve, minden látogatónál (EGT-látogatóknál hozzájárulási jel nélkül süti nélküli módban, lásd lent) |
-| Meta Pixel | Az élő oldalon nincs | Bekötési pont kész, ugyanazokkal a pillanatokkal, mint a Google (PageView, lépcsőoldali ViewContent, `/koszonooldal` Lead); `PUBLIC_META_PIXEL_ID` szükséges |
+| Meta Pixel + Conversions API | Adatkészlet `2159272617955745` (2026-10-01 óta) | Pixel: PageView minden oldalon, ViewContent a lépcsőoldalon, **Lead minden `/koszonooldal`-megtekintéskor**. Szerver: elfogadott ajánlatkérésenként egy Lead (hash-elt e-mail/telefon/település, IP, böngésző, `_fbp`/`_fbc`) ugyanazzal az `event_id`-val, így a Meta a kettőt egynek számolja |
 
 Az eredeti oldalon közvetlen GA4-kód és GTM-ből GA4 is szerepelt, ami ismételt oldalmegtekintéseket okozhat. Az új alapbeállítás egyetlen GA4-konfigurációt tölt. A `PUBLIC_ENABLE_LEGACY_GTM` csak külön konténeraudit és a közvetlen tagek kivezetése után használható; alapértelmezetten `false`.
 
@@ -33,9 +33,10 @@ Az eredeti konténerben webshopos eseménytagek is szerepelnek (`purchase`, `add
 | `form_bekuldes` | Ugyanaz a siker, régi GA4 kompatibilitás | Ugyanaz |
 | Google Ads `conversion` | Ugyanaz a siker | `wGcRCIuopNIaEIfq_5Y_`, `transaction_id` = eseményazonosító |
 | Meta `ViewContent` | Lépcsős oldal betöltésekor | Termékkategória |
-| Meta `Lead` | `/koszonooldal`, sikeres ajánlatkérés után | Űrlapkategória + véletlen eventID |
+| Meta `Lead` (Pixel) | Minden `/koszonooldal`-megtekintéskor; beküldés után az ajánlatkérés azonosítójával (újratöltéskor is ugyanazzal, így a Meta nem duplikál), közvetlen megnyitáskor új azonosítóval | Űrlapkategória + eventID |
+| Meta `Lead` (Conversions API) | Elfogadott ajánlatkérésenként egyszer, a szerverről | Hash-elt e-mail, telefon, település; IP, böngésző, `_fbp`/`_fbc`; ugyanaz az eventID |
 
-A konverzió csatornánként egyszer fut; újratöltés, közvetlen megnyitás vagy 30 percnél régebbi visszaigazolás nem mér. A hozzászólás beküldése nem érdeklődő és nem vált ki Lead eseményt. Telefonkattintásból nem állítjuk, hogy létrejött beszélgetés. Az e-mail-küldő szolgáltatói átvétel nem azonos a beérkezett levél/inbox ellenőrzésével.
+A Google-konverzió (GA4, Ads) egyszer fut; újratöltés, közvetlen megnyitás vagy 30 percnél régebbi visszaigazolás nem mér. A hozzászólás beküldése nem érdeklődő és nem vált ki Lead eseményt. Telefonkattintásból nem állítjuk, hogy létrejött beszélgetés. Az e-mail-küldő szolgáltatói átvétel nem azonos a beérkezett levél/inbox ellenőrzésével.
 
 ## Mérés és személyes adatok
 
@@ -51,7 +52,7 @@ Kampányforrás a levélben: az aktuális oldal címéből az ajánlatkérés me
 4. Hiba, elutasított botellenőrzés, `/koszonooldal` közvetlen megnyitása vagy újratöltése: nincs új lead-konverzió.
 5. Google Ads/GA4 adminban ellenőrizni kell, hogy a régi és új GA4 esemény közül nem számítanak-e mindkettőt elsődleges konverzióként. Ez fiókhozzáférés nélkül nem igazolható.
 
-Meta Conversions API nincs bekapcsolva: nem volt hozzá adatforrás vagy token. A böngészős Pixel-kód kész. Szerveroldali Meta-mérést csak az adatforrás és az adatkezelési tájékoztató későbbi egyeztetésével szabad hozzáadni.
+Meta Conversions API: `META_DATASET_ID` + `FB_CAPI_TOKEN` (Vercel, Production, a token sensitive). Teszteléshez a `META_TEST_EVENT_CODE` az Events Manager „Test events” fülére irányítja a szerveres eseményeket. Meta-hiba sosem akadályozza az ajánlatkérést.
 
 ## Hivatalos dokumentáció
 

@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const config=window.SZOMEX_CONFIG||{};
-  const receiptKey='szomex-receipt',attributionKey='szomex-attribution';
+  const receiptKey='szomex-receipt',attributionKey='szomex-attribution',metaLeadKey='szomex-meta-lead';
   const memory={};
   function read(store,key){try{return store.getItem(key);}catch{return memory[key]||null;}}
   function write(store,key,value){try{store.setItem(key,value);}catch{memory[key]=value;}}
@@ -36,17 +36,20 @@
     if(!allowed||!config.gaId)return;
     window.gtag('event',name,{page_path:params.page_path||location.pathname,form_type:params.form_type||undefined,placement:params.placement||undefined,event_id:params.event_id||undefined,step:params.step||undefined,send_to:config.gaId});
   }
-  // As on the original site, the lead conversion belongs to /koszonooldal: it fires there once on every channel,
-  // and only with a fresh receipt of a submission the server accepted. Direct visits and reloads never convert.
+  // As on the original site, the lead conversion belongs to /koszonooldal. Google (GA4, Ads) converts once, only with a fresh
+  // receipt of a submission the server accepted. The Meta Lead fires on every thank-you page view; after a submission it carries
+  // the enquiry's id, which the server-side Conversions API event shares, so Meta merges reloads and the two sources into one.
   function flushLeadReceipt(){
     if(location.pathname.replace(/\/$/,'')!=='/koszonooldal')return;
     let receipt;try{receipt=JSON.parse(read(sessionStorage,receiptKey)||'null');}catch{receipt=null;}
     remove(sessionStorage,receiptKey);
-    if(!receipt||typeof receipt.id!=='string'||!(Date.now()-receipt.at<1800000))return;
+    const fresh=receipt&&typeof receipt.id==='string'&&Date.now()-receipt.at<1800000;
+    if(fresh)write(sessionStorage,metaLeadKey,JSON.stringify({id:receipt.id,type:receipt.type}));
+    if(config.metaPixelId&&window.fbq){let last;try{last=JSON.parse(read(sessionStorage,metaLeadKey)||'null');}catch{last=null;}window.fbq('track','Lead',{content_name:last?.type==='general'?'Tölgyfa alapanyag':'Tölgyfa lépcső alapanyag'},{eventID:typeof last?.id==='string'?last.id:uuid()});}
+    if(!fresh)return;
     const params={form_type:receipt.type,event_id:receipt.id,page_path:receipt.path};
     track('generate_lead',params);track('form_bekuldes',params);
     if(config.adsId&&config.adsLeadLabel)window.gtag('event','conversion',{send_to:`${config.adsId}/${config.adsLeadLabel}`,transaction_id:receipt.id});
-    if(config.metaPixelId&&window.fbq)window.fbq('track','Lead',{content_name:receipt.type==='stairs'?'Tölgyfa lépcső alapanyag':'Tölgyfa alapanyag'},{eventID:receipt.id});
   }
   activate();
   document.querySelectorAll('[data-track]').forEach(a=>a.addEventListener('click',()=>track(a.dataset.track,{placement:location.pathname==='/'?'home':'stairs'})));

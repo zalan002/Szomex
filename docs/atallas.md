@@ -32,12 +32,15 @@ Vercel → `szomex` → Settings → Environment Variables (beállítva 2026-09-
 | `MAILGUN_API_BASE` | `https://api.eu.mailgun.net/v3` | ugyanaz |
 | `LEAD_TO` | `Szomex Kft. <info@szomex.hu>` | a tesztelő címe |
 | `LEAD_BCC` | titkos másolat a beérkező érdeklődőkről | – |
+| `AIRTABLE_TOKEN` (sensitive), `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE_ID` | `appDbk2eNI5wi7FvR`, `tbldUvXLafkythnJM` | – |
 | `LEAD_FROM` | nincs megadva: `Tölgy Alapanyag weboldal <noreply@mg.traininghungary.com>` | ugyanaz |
 | `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` | nincs megadva (opcionális) | – |
 
 Előnézetből `[TESZT]` tárgyú levél megy, és nem az ügyfélnek. A Mailgun admin kulcsát ne tedd a weboldalra: ha új kulcs kell, a Mailgunban hozz létre `sending` szerepű, `domain` típusú kulcsot erre a domainre, és cseréld a `MAILGUN_API_KEY` értékét.
 
 **Ha nem érkezik levél:** Vercel → `szomex` → Logs, szűrés `/api/lead`-re (`[lead]` kezdetű sorok; személyes adatot nem naplózunk). A válaszkód: `400` hibás mező, `403` idegen eredet, `503` hiányzó kulcs, `502` a Mailgun nem fogadta el. A Mailgun → Logs nézetben a `szomex-ajanlatkeres` címke és a levélben szereplő azonosító (`v:lead_id`) alapján kereshető a kézbesítés. Ha egy címzett visszapattant, a Mailgun letiltólistára teheti, és a további leveleket nem kézbesíti: ilyenkor a Suppressions listából törölni kell.
+
+**Airtable-kimenet (a FIT oldalhoz hasonlóan):** minden elfogadott ajánlatkérés először a „Szomex” bázis „Érdeklődők” táblájába kerül (az `Azonosító` alapján upsert, így ismételt beküldés nem duplikál), utána megy ki a levél, benne a rekord Airtable-linkjével. Az `E-mail állapot` mező `Elküldve` vagy `Újrapróbálandó`. Ha az egyik kimenet hibázik, a másik sikere elég a visszaigazoláshoz; ha mindkettő, a látogató hibaüzenetet kap. A három változó nélkül az oldal csak e-mailt küld. Táblaséma: `node scripts/setup-airtable.mjs`.
 
 A Turnstile opcionális. Ha mindkét kulcsot megadod, a szerver kötelezően ellenőrzi a domaint és a `lead` action értékét; a widget engedélyezett domainjei között szerepeljen az éles és a tesztdomain. A `TURNSTILE_SITE_KEY` buildkor kerül az oldalba, ezért módosítás után új telepítés szükséges.
 

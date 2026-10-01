@@ -37,6 +37,7 @@ Másold át a szükséges beállításokat a `.env.example` alapján a Vercel k�
 | `MAILGUN_DOMAIN`, `MAILGUN_API_BASE` | `mg.traininghungary.com`, `https://api.eu.mailgun.net/v3` | ugyanaz |
 | `LEAD_TO` | `Szomex Kft. <info@szomex.hu>` | a tesztelő saját címe – előnézetből nem megy levél az ügyfélnek |
 | `LEAD_BCC` | a másolatot kérő cím | – |
+| `AIRTABLE_TOKEN` (sensitive), `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE_ID` | Airtable-kimenet: `appDbk2eNI5wi7FvR` / `tbldUvXLafkythnJM` („Szomex” bázis, „Érdeklődők” tábla) | – (előnézetből ne kerüljön tesztrekord a táblába) |
 | `PUBLIC_ENABLE_TRACKING` | `true` | – (előnézetben a mérés mindig ki van kapcsolva) |
 
 Előnézeti levelek tárgya `[TESZT]` előtaggal indul. Új érték csak új telepítéssel él. Részletek: [telepítési és átállási útmutató](docs/atallas.md).

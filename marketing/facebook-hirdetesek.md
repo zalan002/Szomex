@@ -95,7 +95,7 @@ A keret tervezési javaslat, nem eredményígéret. A megjeleníthető beállít
 1. A céloldal éles domainen működjön, és egy valós tesztüzenet megérkezzen a meglévő postafiókba.
 2. Meta Business Portfolio, Facebook-oldal, hirdetési fiók és fizetési beállítás legyen a cégnél.
 3. A Meta Events Managerben létrehozott webes adatforrás/pixel azonosítóját add meg `PUBLIC_META_PIXEL_ID` néven Vercelben, majd új telepítés szükséges.
-4. A Meta teszteseményeknél ellenőrizd a PageView, ViewContent és Lead eseményt hozzájárulás után. Elutasításnál ne fusson Meta-mérés. A Lead csak kézbesítési szolgáltatói átvétel után jelenhet meg.
+4. A Meta teszteseményeknél ellenőrizd a PageView, ViewContent és Lead eseményt (sütibanner nincs, a Pixel minden látogatónál fut). A Lead csak kézbesítési szolgáltatói átvétel után jelenhet meg.
 5. A domain-ellenőrzés, jogosultságok és adatkezelési hivatkozás legyen rendezve az adott fiók követelményei szerint.
 6. Az induló keretet és a fizetett kampány közzétételét a tulajdonos hagyja jóvá.
 

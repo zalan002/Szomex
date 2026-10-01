@@ -1,4 +1,12 @@
-# Ellenőrzés – 2026-09-30
+# Ellenőrzés – 2026-10-01
+
+- Sütibanner megszüntetése és lépcsőoldal-átalakítás: `npm run check` 62/62 sikeres automatikus ellenőrzés. Új tesztek: banner és hozzájárulási jel nélkül minden beállított mérőkód betöltődik, egy korábban elmentett elutasítás sem tiltja a mérést, a régi GTM csak külön bekapcsolva töltődik, előnézetben és helyben nincs mérés, a köszönőoldali konverzió csatornánként egyszer fut, a kampányforrás a munkamenetben megmarad, a mobilos ajánlatkérő sáv az űrlapnál félrehúzódik; a lépcsőoldal egyetlen űrlapja a hero-ban van; egyik oldalon sincs sütibeállítás-gomb.
+- Helyi böngészős végigjátszás Production builddel (mérés bekapcsolva, próba Meta-azonosítóval, a Google/Meta/Clarity kérések blokkolva, az ajánlatkérési végpont utánozva): első betöltéskor banner nélkül elindul a GA4, a Google Ads, a Clarity és a Meta; sikeres beküldés után a `/koszonooldal`-on egyszer `generate_lead`, `form_bekuldes`, Google Ads `conversion` és Meta `Lead`; újratöltés után semmi; a levélbe az UTM-jelölés és a `meta_ads` kattintásforrás kerül. Nincs JavaScript-hiba.
+- `/lepcso` képernyőképek 1440×900, 1280×800, 820×1180 és 390×844 méretben: nincs vízszintes görgetés; 1440×900-on a teljes hero-űrlap a hajtás felett látszik. Javítva: a kötelező mezők csillaga nem törik külön sorba (minden űrlapon), az inspirációs képek a tervezett arányban jelennek meg.
+
+Nem ellenőrzött: a mérési fiókokban (GA4, Google Ads, Clarity) az események tényleges beérkezése; éles telepítés erről a változatról nem történt.
+
+# Korábbi ellenőrzés – 2026-09-30
 
 - `npm run check`: 59/59 sikeres automatikus ellenőrzés (Mailgun-kérés mezői, címzett/Bcc/Reply-To, opcionális Turnstile, Vercel-eredetek, köszönőoldali konverzió csatornánként egyszer, `gclid` megőrzése, kampányforrás a levélben, `randomUUID` nélküli böngésző).
 - Élő tolgyalapanyag.hu újramérése valódi böngészővel: GA4 `G-5W1XXG6H15`, Google Ads `AW-16959665415` minden oldalon; a `/koszonooldal`-on GA4 `form_bekuldes` és a `wGcRCIuopNIaEIfq_5Y_` konverzió; Clarity a GTM-ből. Meta/Facebook Pixel nincs az élő oldalon.

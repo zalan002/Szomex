@@ -78,7 +78,7 @@ $('#et-info-phone').wrap('<a href="tel:+36309480560" data-track="phone_click"></
 $('a[href^="mailto:"]').attr('data-track','email_click');
 $('iframe').each((_,el)=>{const n=$(el);if(n.attr('src')?.includes('maps.google')){const src=n.attr('src');n.attr('data-consent-src',src).removeAttr('src').attr('title','SZOMEX Kft. telephelye Táborfalván').attr('loading','lazy');n.before('<div class="map-consent"><p>A térkép betöltésével a Google Maps szolgáltatáshoz kapcsolódsz.</p><button type="button" data-load-map>Térkép betöltése</button> <a href="https://www.google.com/maps/search/?api=1&query=2381+Táborfalva+Tarcsay+út+41" target="_blank" rel="noopener">Útvonaltervezés</a></div>');}});
 $('head').append('<meta name="description" content="Prémium tölgyfa alapanyag közvetlenül a gyártótól. Széles méretválaszték, egyedi méretek, több mint 30 év tapasztalat. SZOMEX Kft., Táborfalva."><link rel="stylesheet" href="/assets/site.css"><script src="/assets/config.js" defer></script><script src="/assets/site.js" defer></script>');
-$('body').append('<footer class="legal-footer"><a href="/lepcso">Tölgyfa lépcső alapanyag</a><a href="/adatkezeles">Adatkezelési tájékoztató</a><button type="button" data-cookie-settings>Sütibeállítások</button></footer>');
+$('body').append('<footer class="legal-footer"><a href="/lepcso">Tölgyfa lépcső alapanyag</a><a href="/adatkezeles">Adatkezelési tájékoztató</a></footer>');
 await mkdir('src',{recursive:true});await writeFile(output,$.html());
 }
 await importPage('/','src/index.html');

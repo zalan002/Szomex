@@ -52,15 +52,15 @@ A Google-fiók tulajdonosa ellenőrizze a konverziók elsődleges/másodlagos be
 ## 5. Tartalmi és működési jóváhagyás
 
 - A főoldal eredeti tartalmát megőriztük, az ott szereplő raktárkészlet-, 24 órás válasz- és gyártásihatáridő-állítások aktuális voltát a cég ellenőrizze.
-- A lépcsős oldal nem ígér fix árat vagy határidőt; az alapanyag-értékesítést világosan elválasztja a beszereléstől.
-- Az új adatkezelési szöveg tervezet. Az üzemeltetőnek igazolnia kell a cégadatokat, a tényleges adatfeldolgozókat és a javasolt 90 napos lezártérdeklődő-megőrzés alkalmazhatóságát. A levelek törlési rendjét a postafiókban kell megvalósítani; a weboldal nem töröl ott automatikusan.
+- A lépcsős oldal a cég kérésére kiemeli a prémium minőséget, az egyedi méreteket, a kedvező árat és a megrendeléstől számított 7–10 napon belüli szállítást; fix árat nem ígér. Az alapanyag-értékesítést világosan elválasztja a beszereléstől.
+- Az új adatkezelési szöveg tervezet. A 2026-10-01-i változat a sütibanner nélküli mérés jogalapjaként jogos érdeket jelöl meg; ezt adatvédelmi szakember hagyja jóvá. Az üzemeltetőnek igazolnia kell a cégadatokat, a tényleges adatfeldolgozókat és a javasolt 90 napos lezártérdeklődő-megőrzés alkalmazhatóságát. A levelek törlési rendjét a postafiókban kell megvalósítani; a weboldal nem töröl ott automatikusan.
 - A mintablog kommentjei e-mailes moderálásra mennek. Nincs WordPress-szerkesztő vagy adminmigráció. A moderált hozzászólás a forrásban tehető közzé.
 
 ## 6. Elfogadási próba és domainváltás
 
 1. `npm run check` sikeres; mobilon és asztali eszközön a cég nézze át a tartalmat.
 2. Valós céges tesztbeküldés Productionből: érkezés az `info@szomex.hu` fiókba és a titkos másolat, Reply-To válasz, időtúllépés utáni ismétlés ellenőrzése.
-3. Sütielutasítás, csak analitika, csak marketing, visszavonás; Google/Meta tesztesemények ellenőrzése.
+3. Üres sütikkel, első látogatáskor a GA4, Google Ads, Clarity és beállított Meta mérés banner nélkül elindul; Google/Meta tesztesemények ellenőrzése.
 4. Vercelben a `tolgyalapanyag.hu` és `www.tolgyalapanyag.hu` domain hozzáadása, a Vercel által ténylegesen megadott DNS-értékek beállítása. Ne használj kitalált A/CNAME értéket, és ne módosítsd az MX-rekordokat.
 5. TLS, www/nem-www főcím, főoldal, `/lepcso`, régi köszönőoldal, képek, menü, térkép és 404 ellenőrzése az éles domainen.
 6. Search Console-ban az új `sitemap.xml` beküldése a megfelelő tulajdonosi fiókból.

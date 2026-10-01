@@ -1,82 +1,67 @@
 (() => {
   'use strict';
   const config=window.SZOMEX_CONFIG||{};
-  const consentKey='szomex-consent-v1',receiptKey='szomex-receipt',attributionKey='szomex-attribution';
-  let consent={analytics:false,marketing:false};
+  const receiptKey='szomex-receipt',attributionKey='szomex-attribution';
   const memory={};
   function read(store,key){try{return store.getItem(key);}catch{return memory[key]||null;}}
   function write(store,key,value){try{store.setItem(key,value);}catch{memory[key]=value;}}
   function remove(store,key){try{store.removeItem(key);}catch{delete memory[key];}}
-  let saved;
-  try{saved=JSON.parse(read(localStorage,consentKey)||'null');if(saved&&saved.expires>Date.now())consent={analytics:saved.analytics===true,marketing:saved.marketing===true};else saved=null;}catch{saved=null;}
   window.dataLayer=window.dataLayer||[];
   window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
-  window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
-  window.gtag('set','ads_data_redaction',true);
   const loaded=new Set();
   function script(src,id,onload){if(loaded.has(id))return;loaded.add(id);const s=document.createElement('script');s.async=true;s.src=src;s.id=id;if(onload)s.onload=onload;document.head.append(s);}
+  // Like the original site, every visitor is measured; there is no consent banner. Previews and local runs never send data.
   const allowed=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?false:config.trackingEnabled===true;
   const utmKeys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
   // Google Ads click IDs must stay in page_location, otherwise GA4 cannot attribute auto-tagged Ads traffic.
   const adClickKeys=['gclid','gbraid','wbraid','gad_source','gad_campaignid'];
   const utmValue=v=>typeof v==='string'&&/^[\p{L}\p{N}_.{}\- ]{1,150}$/u.test(v);
   function analyticsUrl(){const url=new URL(location.origin+location.pathname),params=new URLSearchParams(location.search);for(const key of utmKeys){const value=params.get(key);if(utmValue(value))url.searchParams.set(key,value);}for(const key of adClickKeys){const value=params.get(key);if(value&&/^[A-Za-z0-9_.-]{1,512}$/.test(value))url.searchParams.set(key,value);}return url.href;}
-  function cleanCookies(){for(const part of document.cookie.split(';')){const key=part.trim().split('=')[0];if(/^(_ga|_gid|_gat|_gcl|_fbp|_fbc|_clck|_clsk)/.test(key)){for(const domain of ['',location.hostname,'.'+location.hostname,'.tolgyalapanyag.hu'])document.cookie=`${key}=; Max-Age=0; path=/; SameSite=Lax${domain?'; domain='+domain:''}`;}}}
   function activate(){
-    window.gtag('consent','update',{analytics_storage:consent.analytics?'granted':'denied',ad_storage:consent.marketing?'granted':'denied',ad_user_data:consent.marketing?'granted':'denied',ad_personalization:consent.marketing?'granted':'denied'});
     if(!allowed)return;
-    const firstId=consent.analytics?config.gaId:consent.marketing?config.adsId:'';
-    if(firstId&&!loaded.has('google')){window.gtag('js',new Date());script('https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(firstId),'google');}
-    if(consent.analytics&&config.gaId&&!loaded.has('ga-config')){loaded.add('ga-config');window.gtag('config',config.gaId,{page_location:analyticsUrl(),send_page_view:true});}
-    if(consent.marketing&&config.adsId&&!loaded.has('ads-config')){loaded.add('ads-config');window.gtag('config',config.adsId);}
-    if(consent.analytics&&config.clarityId){if(!window.clarity)window.clarity=function(){(window.clarity.q=window.clarity.q||[]).push(arguments);};window.clarity('consentv2',{ad_Storage:consent.marketing?'granted':'denied',analytics_Storage:'granted'});script('https://www.clarity.ms/tag/'+config.clarityId,'clarity');}
-    // The original container may contain unknown tags. Load only after both grants.
-    if(consent.analytics&&consent.marketing&&config.enableLegacyGtm&&config.gtmId&&!loaded.has('legacy-gtm')){window.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});script('https://www.googletagmanager.com/gtm.js?id='+config.gtmId,'legacy-gtm');}
-    if(consent.marketing&&config.metaPixelId){
+    const firstId=config.gaId||config.adsId;
+    if(firstId){window.gtag('js',new Date());script('https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(firstId),'google');}
+    if(config.gaId)window.gtag('config',config.gaId,{page_location:analyticsUrl(),send_page_view:true});
+    if(config.adsId)window.gtag('config',config.adsId);
+    if(config.clarityId){if(!window.clarity)window.clarity=function(){(window.clarity.q=window.clarity.q||[]).push(arguments);};script('https://www.clarity.ms/tag/'+config.clarityId,'clarity');}
+    // The original container may contain unknown tags and would double count the direct tags, so it stays opt-in.
+    if(config.enableLegacyGtm&&config.gtmId){window.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});script('https://www.googletagmanager.com/gtm.js?id='+config.gtmId,'legacy-gtm');}
+    if(config.metaPixelId){
       if(!window.fbq){const f=window.fbq=function(){f.callMethod?f.callMethod.apply(f,arguments):f.queue.push(arguments);};window._fbq=f;f.push=f;f.loaded=true;f.version='2.0';f.queue=[];}
-      window.fbq('consent','grant');
-      if(!loaded.has('meta')){script('https://connect.facebook.net/en_US/fbevents.js','meta');window.fbq('init',config.metaPixelId);window.fbq('track','PageView');if(location.pathname.replace(/\/$/,'')==='/lepcso')window.fbq('track','ViewContent',{content_name:'Tölgyfa lépcső alapanyag',content_category:'alapanyag'});}
+      script('https://connect.facebook.net/en_US/fbevents.js','meta');window.fbq('init',config.metaPixelId);window.fbq('track','PageView');if(location.pathname.replace(/\/$/,'')==='/lepcso')window.fbq('track','ViewContent',{content_name:'Tölgyfa lépcső alapanyag',content_category:'alapanyag'});
     }
     flushLeadReceipt();
   }
   function track(name,params={}){
-    if(!allowed||!consent.analytics||!config.gaId)return;
+    if(!allowed||!config.gaId)return;
     window.gtag('event',name,{page_path:params.page_path||location.pathname,form_type:params.form_type||undefined,placement:params.placement||undefined,event_id:params.event_id||undefined,send_to:config.gaId});
   }
-  // As on the original site, the lead conversion belongs to /koszonooldal: it fires there once per channel,
+  // As on the original site, the lead conversion belongs to /koszonooldal: it fires there once on every channel,
   // and only with a fresh receipt of a submission the server accepted. Direct visits and reloads never convert.
   function flushLeadReceipt(){
     if(location.pathname.replace(/\/$/,'')!=='/koszonooldal')return;
     let receipt;try{receipt=JSON.parse(read(sessionStorage,receiptKey)||'null');}catch{receipt=null;}
-    if(!receipt)return;
-    if(typeof receipt.id!=='string'||!(Date.now()-receipt.at<1800000)){remove(sessionStorage,receiptKey);return;}
-    const sent={...receipt.sent},params={form_type:receipt.type,event_id:receipt.id,page_path:receipt.path};
-    if(consent.analytics&&config.gaId&&!sent.ga){track('generate_lead',params);track('form_bekuldes',params);sent.ga=true;}
-    if(consent.marketing&&config.adsId&&config.adsLeadLabel&&!sent.ads){window.gtag('event','conversion',{send_to:`${config.adsId}/${config.adsLeadLabel}`,transaction_id:receipt.id});sent.ads=true;}
-    if(consent.marketing&&config.metaPixelId&&window.fbq&&!sent.meta){window.fbq('track','Lead',{content_name:receipt.type==='stairs'?'Tölgyfa lépcső alapanyag':'Tölgyfa alapanyag'},{eventID:receipt.id});sent.meta=true;}
-    const pending=(config.gaId&&!sent.ga)||(config.adsId&&config.adsLeadLabel&&!sent.ads)||(config.metaPixelId&&!sent.meta);
-    if(pending)write(sessionStorage,receiptKey,JSON.stringify({...receipt,sent}));else remove(sessionStorage,receiptKey);
+    remove(sessionStorage,receiptKey);
+    if(!receipt||typeof receipt.id!=='string'||!(Date.now()-receipt.at<1800000))return;
+    const params={form_type:receipt.type,event_id:receipt.id,page_path:receipt.path};
+    track('generate_lead',params);track('form_bekuldes',params);
+    if(config.adsId&&config.adsLeadLabel)window.gtag('event','conversion',{send_to:`${config.adsId}/${config.adsLeadLabel}`,transaction_id:receipt.id});
+    if(config.metaPixelId&&window.fbq)window.fbq('track','Lead',{content_name:receipt.type==='stairs'?'Tölgyfa lépcső alapanyag':'Tölgyfa alapanyag'},{eventID:receipt.id});
   }
-  const panel=document.createElement('section');panel.className='cookie-panel';panel.setAttribute('aria-label','Sütibeállítások');panel.hidden=true;
-  panel.innerHTML='<h2>Te döntesz a sütikről.</h2><p>Az oldal működéséhez szükséges beállításokon túl csak az engedélyeddel használunk látogatottsági és hirdetési mérést. <a href="/adatkezeles">Részletek</a></p><div class="cookie-options" hidden><label><input type="checkbox" name="analytics"> Látogatottság és használat (Google / Clarity)</label><label><input type="checkbox" name="marketing"> Hirdetési mérés (Google / Meta)</label></div><div class="cookie-actions"><button type="button" data-choice="reject">Elutasítom</button><button type="button" data-choice="settings">Beállítom</button><button type="button" data-choice="accept" class="accept">Elfogadom</button></div>';
-  document.body.append(panel);
-  let panelOpener;
-  function showSettings(expanded=false){panelOpener=document.activeElement;panel.hidden=false;panel.querySelector('.cookie-options').hidden=!expanded;panel.querySelector('[name=analytics]').checked=consent.analytics;panel.querySelector('[name=marketing]').checked=consent.marketing;panel.querySelector('[data-choice=settings]').textContent=expanded?'Mentés':'Beállítom';if(expanded)panel.querySelector('input').focus();}
-  function setConsent(next){const revoked=(consent.analytics&&!next.analytics)||(consent.marketing&&!next.marketing);consent=next;write(localStorage,consentKey,JSON.stringify({...next,expires:Date.now()+180*86400000}));activate();if(!next.marketing&&window.fbq)window.fbq('consent','revoke');if(!next.analytics&&window.clarity)window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'denied'});if(revoked){cleanCookies();remove(sessionStorage,attributionKey);}panel.hidden=true;panelOpener?.focus();if(revoked)location.reload();}
-  panel.addEventListener('click',e=>{const b=e.target.closest('[data-choice]');if(!b)return;const choice=b.dataset.choice;if(choice==='reject')setConsent({analytics:false,marketing:false});if(choice==='accept')setConsent({analytics:true,marketing:true});if(choice==='settings'){if(panel.querySelector('.cookie-options').hidden)showSettings(true);else setConsent({analytics:panel.querySelector('[name=analytics]').checked,marketing:panel.querySelector('[name=marketing]').checked});}});
-  if(!saved)showSettings();activate();
-  document.querySelectorAll('[data-cookie-settings]').forEach(b=>b.addEventListener('click',()=>showSettings(true)));
+  activate();
   document.querySelectorAll('[data-track]').forEach(a=>a.addEventListener('click',()=>track(a.dataset.track,{placement:location.pathname==='/'?'home':'stairs'})));
+  // On phones the call-to-action bar would cover the quote form, so it steps aside while the form is on screen.
+  const mobileCta=document.querySelector('.mobile-cta'),quote=document.getElementById('ajanlat');
+  if(mobileCta&&quote&&'IntersectionObserver' in window)new IntersectionObserver(([entry])=>mobileCta.classList.toggle('is-hidden',entry.isIntersecting),{rootMargin:'0px 0px -80px 0px'}).observe(quote);
   document.querySelectorAll('[data-load-map]').forEach(b=>b.addEventListener('click',()=>{const box=b.closest('.map-consent');const frame=box.nextElementSibling;if(frame?.matches('iframe[data-consent-src]')){frame.src=frame.dataset.consentSrc;box.hidden=true;}}));
-  // Campaign source of the current URL travels with the enquiry (only the source type, never the raw click ID).
-  // Keeping it across pages needs a measurement consent.
+  // Campaign source of the current URL travels with the enquiry (only the source type, never the raw click ID),
+  // and stays available on the other pages for the rest of the browser session.
   function attribution(){
     const p=new URLSearchParams(location.search),out={};
     for(const k of utmKeys){const val=p.get(k);if(utmValue(val))out[k]=val;}
     if(['gclid','gbraid','wbraid'].some(k=>p.get(k)))out.click_source='google_ads';else if(p.get('fbclid'))out.click_source='meta_ads';
-    if(!consent.analytics&&!consent.marketing)return out;
-    if(Object.keys(out).length)write(sessionStorage,attributionKey,JSON.stringify(out));
-    try{return Object.keys(out).length?out:JSON.parse(read(sessionStorage,attributionKey)||'{}');}catch{return {};}
+    if(Object.keys(out).length){write(sessionStorage,attributionKey,JSON.stringify(out));return out;}
+    try{return JSON.parse(read(sessionStorage,attributionKey)||'{}');}catch{return {};}
   }
   attribution();
   // crypto.randomUUID is missing on older Safari (before iOS 15.4); a random v4 UUID keeps the form working there.

@@ -5,10 +5,10 @@ A tolgyalapanyag.hu nyilvános WordPress/Divi oldalának önálló, Vercelre el�
 ## Mi készült el?
 
 - Az eredeti főoldal HTML-je, arculata, szövegei, képei, betűkészletei és Divi megjelenési fájljai helyben vannak. A menü, szekcióhivatkozások, GYIK, galéria, kapcsolat és térkép megmaradt.
-- Új `/lepcso`: három generált lépcsőkép, mobilos ajánlatkérés, alapanyag/beszerelés egyértelmű elhatárolása, méret- és időpontkérdések.
+- Új `/lepcso`: ajánlatkérő űrlap a hero-szekcióban (a LinkedinSolution és Stratify oldalakhoz hasonlóan), kiemelve a prémium minőséget, a 7–10 napon belüli szállítást, az egyedi méreteket és a kedvező árat; három generált lépcsőkép, alapanyag/beszerelés egyértelmű elhatárolása, méret- és időpontkérdések.
 - Köszönőoldal, adatkezelési tájékoztató tervezete, keresés és 404. A régi mintabejegyzés és kategória címei is megmaradtak.
 - Saját Vercel-funkció az űrlapfogadáshoz: szerveroldali validáció, botvédelem (honeypot, eredetellenőrzés, opcionális Turnstile) és e-mail-küldés **Mailgunnal** (EU-régió, `mg.traininghungary.com`). Címzett: **Szomex Kft. <info@szomex.hu>**, a beérkező érdeklődőkről titkos másolat (`LEAD_BCC`) megy.
-- Az eredeti oldallal azonos GA4 (`G-5W1XXG6H15`), Google Ads (`AW-16959665415`) és Clarity azonosítók. A Google Ads-konverzió (`wGcRCIuopNIaEIfq_5Y_`) és a GA4 `form_bekuldes` az eredetihez hasonlóan a `/koszonooldal` megjelenésekor fut, de csak valódi, elfogadott beküldés után. Hozzájárulástól függő betöltés. Meta Pixel bekötési pont (PageView, ViewContent, Lead) – az eredeti oldalon nincs Pixel, azonosító kell hozzá.
+- Az eredeti oldallal azonos GA4 (`G-5W1XXG6H15`), Google Ads (`AW-16959665415`) és Clarity azonosítók. A Google Ads-konverzió (`wGcRCIuopNIaEIfq_5Y_`) és a GA4 `form_bekuldes` az eredetihez hasonlóan a `/koszonooldal` megjelenésekor fut, de csak valódi, elfogadott beküldés után. Sütibanner nincs: az eredeti oldalhoz hasonlóan minden látogatót mérünk. Meta Pixel bekötési pont (PageView, ViewContent, Lead) – az eredeti oldalon nincs Pixel, azonosító kell hozzá.
 - `marketing/`: két feed- és egy Story-kreatív, pontos méretű JPG exportok, szövegek, UTM-linkek, induló beállítások és eredménykövető sablon.
 
 ## Indítás helyben
@@ -53,7 +53,7 @@ Ez Vercelen futó weboldal, nem WordPress-adminisztráció. A szövegek a `src/`
 
 A régi mintabejegyzés hozzászólásai statikusan megmaradnak. Új hozzászólás e-mailben moderálásra küldhető; a közzététel a forrás frissítésével történik. A régi WordPress-adminban történő moderálás nincs megvalósítva. A lépcsőfotók AI-val készült inspirációk, nem vállalati referenciák.
 
-A sütikezelés új, konzervatív megoldás: mérés csak hozzájárulás után. Az eredeti köszönőoldal-megtekintéshez kötött konverziót tényleges, sikeres beküldés váltja ki, ezért a közvetlen látogatás/újratöltés nem hoz létre hamis érdeklődőt. A régi GTM konténer nincs a közvetlen tagek mellett párhuzamosan betöltve. Részletek: [mérési leltár](docs/meresek.md).
+Sütibanner nincs (2026-10-01 óta): az eredeti oldalhoz hasonlóan minden látogatót mérünk, hozzájárulás kérése nélkül. Az eredeti köszönőoldal-megtekintéshez kötött konverziót tényleges, sikeres beküldés váltja ki, ezért a közvetlen látogatás/újratöltés nem hoz létre hamis érdeklődőt. A régi GTM konténer nincs a közvetlen tagek mellett párhuzamosan betöltve. Részletek: [mérési leltár](docs/meresek.md).
 
 ## Fájlok
 
@@ -62,11 +62,11 @@ A sütikezelés új, konzervatív megoldás: mérés csak hozzájárulás után.
 | `src/index.html` | Eredeti főoldal átvett szerkezete |
 | `src/lepcso.html` | Új lépcsős oldal |
 | `src/partials/form.html` | Új ajánlatkérő űrlap |
-| `public/assets/site.css`, `site.js` | Új oldal, űrlap, sütikezelés és mérések |
+| `public/assets/site.css`, `site.js` | Új oldal, űrlap és mérések |
 | `public/wp-content`, `public/wp-includes` | Az eredeti oldal saját példányban tárolt fájljai |
 | `api/lead.js`, `lib/lead.mjs` | Szerveroldali fogadás és Mailgun e-mail |
 | `audit/` | Nyilvános források leltára, ellenőrzési nyom |
-| `tests/` | Űrlap, hozzájárulás, konverzió és tartalmi ellenőrzések |
+| `tests/` | Űrlap, mérés, konverzió és tartalmi ellenőrzések |
 | `marketing/` | Hirdetési csomag és generálási promptok |
 
 Az `audit:source` újra beolvassa a régi oldalt és felülírja az importált HTML-eket; ezt csak szándékos újraimportáláshoz használd. A normál build teljesen helyi és nem függ a régi tárhelytől. A saját és átvett anyagok felhasználási jogai az eredeti jogosultaknál maradnak.

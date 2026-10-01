@@ -52,7 +52,7 @@ A Google-fiók tulajdonosa ellenőrizze a konverziók elsődleges/másodlagos be
 ## 5. Tartalmi és működési jóváhagyás
 
 - A főoldal eredeti tartalmát megőriztük, az ott szereplő raktárkészlet-, 24 órás válasz- és gyártásihatáridő-állítások aktuális voltát a cég ellenőrizze.
-- A lépcsős oldal a cég kérésére kiemeli a prémium minőséget, az egyedi méreteket, a kedvező árat és a megrendeléstől számított 7–10 napon belüli szállítást; fix árat nem ígér. Az alapanyag-értékesítést világosan elválasztja a beszereléstől.
+- A lépcsős oldal a cég kérésére kiemeli a prémium minőséget, az egyedi méreteket, a kedvező árat és a megrendeléstől számított akár 3 munkanapon belüli szállítást; fix árat nem ígér. Az alapanyag-értékesítést világosan elválasztja a beszereléstől.
 - Az új adatkezelési szöveg tervezet. A 2026-10-01-i változat a sütibanner nélküli mérés jogalapjaként jogos érdeket jelöl meg; ezt adatvédelmi szakember hagyja jóvá. Az üzemeltetőnek igazolnia kell a cégadatokat, a tényleges adatfeldolgozókat és a javasolt 90 napos lezártérdeklődő-megőrzés alkalmazhatóságát. A levelek törlési rendjét a postafiókban kell megvalósítani; a weboldal nem töröl ott automatikusan.
 - A mintablog kommentjei e-mailes moderálásra mennek. Nincs WordPress-szerkesztő vagy adminmigráció. A moderált hozzászólás a forrásban tehető közzé.
 

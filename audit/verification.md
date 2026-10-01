@@ -1,5 +1,7 @@
 # Ellenőrzés – 2026-10-01
 
+- A szállítási ígéret a megrendelő kérésére „akár 3 munkanap” lett (korábban 7–10 nap); a főoldal eredeti GYIK-jével is egyezik.
+
 - Sütibanner megszüntetése és lépcsőoldal-átalakítás: `npm run check` 62/62 sikeres automatikus ellenőrzés. Új tesztek: banner és hozzájárulási jel nélkül minden beállított mérőkód betöltődik, egy korábban elmentett elutasítás sem tiltja a mérést, a régi GTM csak külön bekapcsolva töltődik, előnézetben és helyben nincs mérés, a köszönőoldali konverzió csatornánként egyszer fut, a kampányforrás a munkamenetben megmarad, a mobilos ajánlatkérő sáv az űrlapnál félrehúzódik; a lépcsőoldal egyetlen űrlapja a hero-ban van; egyik oldalon sincs sütibeállítás-gomb.
 - Helyi böngészős végigjátszás Production builddel (mérés bekapcsolva, próba Meta-azonosítóval, a Google/Meta/Clarity kérések blokkolva, az ajánlatkérési végpont utánozva): első betöltéskor banner nélkül elindul a GA4, a Google Ads, a Clarity és a Meta; sikeres beküldés után a `/koszonooldal`-on egyszer `generate_lead`, `form_bekuldes`, Google Ads `conversion` és Meta `Lead`; újratöltés után semmi; a levélbe az UTM-jelölés és a `meta_ads` kattintásforrás kerül. Nincs JavaScript-hiba.
 - `/lepcso` képernyőképek 1440×900, 1280×800, 820×1180 és 390×844 méretben: nincs vízszintes görgetés; 1440×900-on a teljes hero-űrlap a hajtás felett látszik. Javítva: a kötelező mezők csillaga nem törik külön sorba (minden űrlapon), az inspirációs képek a tervezett arányban jelennek meg.

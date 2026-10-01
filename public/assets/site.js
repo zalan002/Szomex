@@ -34,7 +34,7 @@
   }
   function track(name,params={}){
     if(!allowed||!config.gaId)return;
-    window.gtag('event',name,{page_path:params.page_path||location.pathname,form_type:params.form_type||undefined,placement:params.placement||undefined,event_id:params.event_id||undefined,send_to:config.gaId});
+    window.gtag('event',name,{page_path:params.page_path||location.pathname,form_type:params.form_type||undefined,placement:params.placement||undefined,event_id:params.event_id||undefined,step:params.step||undefined,send_to:config.gaId});
   }
   // As on the original site, the lead conversion belongs to /koszonooldal: it fires there once on every channel,
   // and only with a fresh receipt of a submission the server accepted. Direct visits and reloads never convert.
@@ -69,12 +69,29 @@
   const forms=[...document.querySelectorAll('[data-lead-form]')];
   function setupChallenge(){if(!config.turnstileSiteKey||!window.turnstile)return;forms.forEach(form=>{const el=form.querySelector('[data-turnstile]');if(el.dataset.widget)return;el.dataset.widget=window.turnstile.render(el,{sitekey:config.turnstileSiteKey,action:'lead',theme:'light'});});}
   if(forms.length&&config.turnstileSiteKey)script('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit','turnstile',setupChallenge);
+  // Multi-step form like the Linkedinsolution and Stratify pages: one step at a time with progress, each step checked before moving on.
+  // Without JavaScript every step stays visible and the server validates.
+  function stepper(form){
+    const steps=[...form.querySelectorAll('.form-step')];if(steps.length<2)return null;
+    const title=form.querySelector('.step-title'),no=form.querySelector('.step-no'),bar=form.querySelector('.step-bar'),back=form.querySelector('.step-back'),next=form.querySelector('.step-next'),submit=form.querySelector('[type=submit]');
+    const fields=i=>[...steps[i].querySelectorAll('input,select,textarea')];
+    let current=0;
+    function show(i,focus){current=i;steps.forEach((s,j)=>{s.hidden=j!==i;});title.textContent=steps[i].dataset.title;no.textContent=(i+1)+' / '+steps.length;const pct=Math.round((i+1)/steps.length*100);bar.firstElementChild.style.width=pct+'%';bar.setAttribute('aria-valuenow',String(pct));back.hidden=i===0;next.hidden=i===steps.length-1;submit.hidden=i!==steps.length-1;if(focus)fields(i)[0]?.focus();}
+    function check(i){const bad=fields(i).find(el=>!el.checkValidity());if(bad){bad.reportValidity();return false;}return true;}
+    next.addEventListener('click',()=>{if(!check(current))return;show(current+1,true);track('form_step',{form_type:form.dataset.kind,step:current+1});});
+    back.addEventListener('click',()=>show(current-1,true));
+    form.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('input')&&current<steps.length-1){e.preventDefault();next.click();}});
+    form.classList.add('is-stepped');show(0);
+    // Before sending, jump to the first step that still has an invalid field.
+    return {ready(){const i=steps.findIndex((s,j)=>fields(j).some(el=>!el.checkValidity()));if(i<0)return true;show(i);check(i);return false;}};
+  }
   forms.forEach(form=>{
     if(form.dataset.kind==='stairs')form.elements.materialOnly.required=true;
+    const steps=form.hasAttribute('data-steps')?stepper(form):null;
     let started=false,requestId=uuid(),completed=false;
     form.addEventListener('input',()=>{if(!started){started=true;track('form_start',{form_type:form.dataset.kind});}},{passive:true});
     form.addEventListener('submit',async event=>{
-      event.preventDefault();if(completed||!form.reportValidity())return;
+      event.preventDefault();if(completed||(steps?!steps.ready():!form.reportValidity()))return;
       const button=form.querySelector('[type=submit]'),status=form.querySelector('.form-status');
       button.disabled=true;button.textContent='Küldés folyamatban…';status.className='form-status';status.textContent='';
       const data=Object.fromEntries(new FormData(form));

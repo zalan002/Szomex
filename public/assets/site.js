@@ -62,7 +62,7 @@
   function attribution(){
     const p=new URLSearchParams(location.search),out={};
     for(const k of utmKeys){const val=p.get(k);if(utmValue(val))out[k]=val;}
-    if(['gclid','gbraid','wbraid'].some(k=>p.get(k)))out.click_source='google_ads';else if(p.get('fbclid'))out.click_source='meta_ads';
+    if(['gclid','gbraid','wbraid','gad_source'].some(k=>p.get(k)))out.click_source='google_ads';else if(p.get('fbclid'))out.click_source='meta_ads';
     if(Object.keys(out).length){write(sessionStorage,attributionKey,JSON.stringify(out));return out;}
     try{return JSON.parse(read(sessionStorage,attributionKey)||'{}');}catch{return {};}
   }

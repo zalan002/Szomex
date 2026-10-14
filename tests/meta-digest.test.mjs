@@ -37,6 +37,39 @@ test('Budapest 08:00 and local midnight remain correct across winter/summer tran
     ['2027-03-29T06:00:00Z', '2027-03-28T22:00:00.000Z'],
   ]) { const w = reportWindow(new Date(date)); assert.equal(w.hour, 8); assert.equal(w.cutoff, cutoff); }
 });
+
+test('localized Meta contact keys and option keys reach readable email and CRM contact columns', async () => {
+  const questions = [
+    {key: 'teljes_név', type: 'FULL_NAME', label: 'Full name'},
+    {key: 'e-mail_cím', type: 'EMAIL', label: 'Email'},
+    {key: 'telefonszám', type: 'PHONE', label: 'Phone number'},
+    {key: 'település', type: 'CITY', label: 'City'},
+    {key: 'mikor_lenne_szükséged_rá?', type: 'CUSTOM', label: 'Mikor lenne szükséged rá?', options: [{key: '1–3_hónapon_belül', value: '1–3 hónapon belül'}]},
+    {key: 'méretek', type: 'CUSTOM', label: 'Méretek'},
+  ];
+  const original = {id: '123', created_time: '2026-10-14T10:15:29+0000', field_data: [
+    {name: 'teljes_név', values: ['Teszt Elek']}, {name: 'e-mail_cím', values: ['test@example.com']},
+    {name: 'telefonszám', values: ['+36301234567']}, {name: 'település', values: ['Táborfalva']},
+    {name: 'mikor_lenne_szükséged_rá?', values: ['1–3_hónapon_belül']},
+    {name: 'méretek', values: ['12 lépcsőlap, 100 × 30 cm']},
+  ]};
+  const data = await readMetaLeads(env, async url => ({ok: true, json: async () => String(url).includes('/leads?') ? {data: [original]} : {id: FORM_ID, questions}}));
+  const fields = airtableFields(data.leads[0], data.labels);
+  assert.equal(fields['Név'], 'Teszt Elek'); assert.equal(fields['E-mail'], 'test@example.com');
+  assert.equal(fields['Telefon'], '+36301234567'); assert.equal(fields['Település'], 'Táborfalva');
+  const message = composeDigest(data.leads, data.labels, reportWindow(now));
+  assert.match(message.text, /Név: Teszt Elek/);
+  assert.match(message.text, /Mikor lenne szükséged rá\?: 1–3 hónapon belül/);
+  assert.match(message.text, /Méretek: 12 lépcsőlap, 100 × 30 cm/);
+  assert(!message.text.includes('Név: nem adta meg'));
+  assert.equal(original.field_data[0].name, 'teljes_név');
+});
+
+test('ambiguous localized contact mappings fail instead of dropping one answer', async () => {
+  await assert.rejects(readMetaLeads(env, async url => ({ok: true, json: async () => String(url).includes('/leads?')
+    ? {data: [{id: '123', created_time: START, field_data: [{name: 'a', values: ['First']}, {name: 'b', values: ['Second']}]}]}
+    : {id: FORM_ID, questions: [{key: 'a', type: 'FULL_NAME'}, {key: 'b', type: 'FULL_NAME'}]}})), /META_FIELD_COLLISION/);
+});
 test('authorization requires a strong exact bearer token', () => {
   assert(authorized(`Bearer ${env.CRON_SECRET}`, env.CRON_SECRET));
   for (const header of [undefined, '', 'Bearer short', `Bearer ${env.CRON_SECRET}x`]) assert(!authorized(header, env.CRON_SECRET));

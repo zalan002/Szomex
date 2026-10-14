@@ -1,13 +1,14 @@
 # SZOMEX – online napi Meta összesítő
 
-Állapot: online bekötés és ellenőrzés folyamatban; a napi küldés még kikapcsolva.
+Állapot: az online napi küldés aktív; a helyi automatizmus PAUSED. Az első napi összesítő 2026. október 15. 08:00-kor esedékes.
 
 A weboldal meglévő Vercel–Airtable–Mailgun hátterét használja. Nem igényel bekapcsolt számítógépet, Chrome-ot, Codexet, Make- vagy Zapier-fiókot.
 
 ## Kimenet
 
 - Oldal: Szomex Kft, `113530167004513`.
-- Kizárólagos űrlap: `2358063358346039`, SZOMEX – Tölgyfa lépcső alapanyag – 2026.10.14.
+- Kizárólagos űrlap: `1114549927619150`, SZOMEX – Tölgyfa lépcső alapanyag – 2026.10.14 v2.
+- Az instant form adatvédelmi linkje: https://www.szomex.hu/adatvedelem-45 . A közös CRM api alkalmazás adatvédelmi linkje: https://traininghungary.com/adatkezeles .
 - Címzettek: `info@szomex.hu`, `zalan@traininghungary.com`.
 - Napi első futás: 08:00 Europe/Budapest. A nyári/téli időszámítást a kód kezeli; a további aznapi időpontok helyreállítási próbák, nem újabb összesítők.
 - Az előző helyi nap végéig beérkezett, még nem továbbított kitöltések. Kezdőnap: 2026.10.14.; első teljes napi jelentés: október 15.
@@ -45,7 +46,9 @@ A `self-test` egyszeri, rögzített azonosítójú szintetikus rekordot ír az A
 
 A `meta-test` egy ténylegesen a Meta hivatalos teszteszközével létrehozott kitöltést továbbít. Előtte annak azonosítóját a `META_TEST_LEAD_IDS` változóba kell tenni; az elfogadási teszt pontosan egy numerikus azonosítót követel meg. Kizárólag ezt a kitöltést menti az Airtable-be, minden elmentett mezőt visszaellenőriz, majd külön TESZT tárgyú levélben továbbítja. Az összes többi kitöltést figyelmen kívül hagyja. A `meta-test-status` a Meta- és Airtable-adatokat újra összeveti, és mindkét címzettnél kézbesítési eseményt követel meg. Sikeres állapot: `meta_end_to_end_verified`. A külön `meta-acceptance-test-v1.json` állapot megakadályozza az ismételt küldést és az új tesztazonosítóval történő véletlen újraindítást. Az elfogadási teszt után `META_DIGEST_SELF_TEST=false` zárja le a tesztfelületet.
 
-A Meta-lekérés alapverziója `v25.0`. Csak a kitöltés azonosítóját, időpontját és válaszait kéri; az `ad_id` mezőt nem, így nem igényel külön hirdetési metaadat-olvasást. A felhasználó kifejezetten jóváhagyta a `leads_retrieval`, `pages_read_engagement`, `pages_manage_ads` jogosultságokat. Ezzel a külön Szomex rendszerfelhasználóval az űrlap és a hivatalos tesztkitöltés olvasása sikeres; további scopes vagy hirdetési fiók-hozzárendelés nem szükséges. A napi küldés kikapcsolva marad a sikeres teljes online tesztig.
+A Meta-lekérés alapverziója `v25.0`. Csak a kitöltés azonosítóját, időpontját és válaszait kéri; az `ad_id` mezőt nem, így nem igényel külön hirdetési metaadat-olvasást. A felhasználó kifejezetten jóváhagyta a `leads_retrieval`, `pages_read_engagement`, `pages_manage_ads` jogosultságokat. Ezzel a külön Szomex rendszerfelhasználóval az űrlap és a hivatalos tesztkitöltés olvasása sikeres; további scopes vagy hirdetési fiók-hozzárendelés nem szükséges. A teljes online teszt sikeres volt: Meta-olvasás, Airtable-visszaellenőrzés és mindkét címzett Mailgun delivered állapota. A napi küldés be van kapcsolva, a tesztfelület lezárva.
+
+A Meta a közzétett űrlap adatvédelmi linkjének módosításához új példányt igényelt. A v2 űrlap 2026. október 14-én 14:13 CEST-kor lett aktív, azonos kérdésekkel, magyar nyelvvel, Higher intent és Restricted beállítással, kikapcsolt Flexible form delivery mellett. A korábbi `2358063358346039` űrlapon nem volt valódi kitöltés; az új űrlapra váltás az első napi összesítő előtt történt. A korábbi elfogadási teszt (`1421776476813840`) történeti igazolás marad, nem szabad újraindítani az új űrlap ellen. A váltás ellenőrzéséhez a küldés nélküli `check` mód használható.
 
 A tényleges űrlap magyar mezőkulcsokat ad vissza (például `teljes_név`, `e-mail_cím`). Ezeket az API által megadott kérdéstípus alapján normalizáljuk, így a név, e-mail, telefon és település a megfelelő CRM-oszlopokba kerül. A választógombok technikai kulcsa helyett az API-ban megadott olvasható válasz jelenik meg; ismeretlen érték változatlanul megmarad. Az egyedi kérdések és válaszaik teljes egészében bekerülnek az összesítőbe.
 

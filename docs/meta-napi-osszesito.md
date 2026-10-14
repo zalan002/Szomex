@@ -1,6 +1,6 @@
 # SZOMEX – online napi Meta összesítő
 
-Állapot: elkészített, helyben tesztelhető megoldás; még nincs élesítve.
+Állapot: online bekötés és ellenőrzés folyamatban; a napi küldés még kikapcsolva.
 
 A weboldal meglévő Vercel–Airtable–Mailgun hátterét használja. Nem igényel bekapcsolt számítógépet, Chrome-ot, Codexet, Make- vagy Zapier-fiókot.
 
@@ -36,6 +36,14 @@ Hiba esetén naponta legfeljebb egyszer kísérel meg figyelmeztető levelet kü
 6. Külön, egyértelműen TESZT tárgyú levél mindkét engedélyezett címzettnek, és a Mailgun két kézbesítési eseményének ellenőrzése. Tesztlead esetén annak azonosítója kerüljön a `META_TEST_LEAD_IDS` kizárási listába. Éles leadet nem szabad tesztként törölni.
 7. Ha a régi helyi automatizmus már küldött, a helyi napló `sent_lead_ids` és sikeres feldolgozási határ értékeit át kell emelni az online állapotba az átfedés elkerülésére.
 8. Sikeres teljes ellenőrzés után `META_DIGEST_ENABLED=true`, új Production telepítés és Cron Jobs ellenőrzése. Ezután a régi `szomex-napi-meta-rlapkit-lt-sek` Codex automatizmus szüneteltetése.
+
+## Felhőben végzett infrastruktúra-teszt
+
+Kizárólag Production környezetben, `META_DIGEST_SELF_TEST=true` mellett érhető el az ideiglenes `/api/meta-digest?mode=setup` ellenőrző oldal. A kulcsot HTTPS POST törzsben vagy Bearer fejlécben fogadja; nem kerül URL-be, naplóba vagy helyi fájlba. A felület semmilyen konfigurációt nem mutat meg hitelesítés nélkül.
+
+A `self-test` egyszeri, rögzített azonosítójú szintetikus rekordot ír az Airtable-be, visszaolvassa, ellenőrzi a privát Blob állapotot és a hibás ETag elutasítását, majd TESZT tárgyú levelet küld a két engedélyezett címzettnek. A `test-status` a Mailgun eseményeiből mindkét címzetthez megköveteli a `delivered` állapotot. Ezek a címzett levelezőszerverének átvételét igazolják, nem a levél elolvasását vagy a spam mappa elkerülését. A tesztállapot külön Blob-fájlba kerül, személyes adatok nélkül. Bizonytalan küldésnél nincs automatikus újraküldés. A teszt nem bizonyítja a Meta elérhetőségét; ahhoz külön `check` és valódi Meta tesztlead szükséges.
+
+Létrehozott tároló: `szomex-meta-digest`, `store_Q8ipNLXdhShRoYyc`, private, FRA1; kizárólag Production kapcsolat, OIDC hitelesítés. A felhasználó havi 1 USD tárolási keretet engedélyezett. Külön tárolónkénti automatikus költséglimit még nincs igazolva; a normál működés kevés műveletet végez, a két állapotfájl írását egyenként 1 MB-ra korlátozzuk. Ez nem szolgáltatói számlázási plafon.
 
 ## Bizonytalan küldés feloldása
 

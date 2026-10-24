@@ -70,6 +70,56 @@ test('ambiguous localized contact mappings fail instead of dropping one answer',
     ? {data: [{id: '123', created_time: START, field_data: [{name: 'a', values: ['First']}, {name: 'b', values: ['Second']}]}]}
     : {id: FORM_ID, questions: [{key: 'a', type: 'FULL_NAME'}, {key: 'b', type: 'FULL_NAME'}]}})), /META_FIELD_COLLISION/);
 });
+
+test('unanswered Meta fields survive import, CRM storage and one-time catch-up delivery', async () => {
+  const questions = [
+    {key: 'meretek', type: 'CUSTOM', label: 'Méretek'},
+    {key: 'telefonszam', type: 'PHONE', label: 'Telefon'},
+    {key: 'telepules', type: 'CITY', label: 'Település'},
+    {key: 'nev', type: 'FULL_NAME'}, {key: 'email', type: 'EMAIL'},
+  ];
+  const newLead = {id: '202', created_time: '2026-10-23T18:00:00Z', field_data: [
+    {name: 'meretek'}, {name: 'telefonszam', values: null}, {name: 'telepules', values: []},
+    {name: 'nev', values: ['Teszt Elek']}, {name: 'email', values: ['test@example.com']},
+    {name: 'megjegyzes', values: ['16 lépcsőlap és homlokfal', '100 × 30 cm']},
+  ]};
+  const fetchLeads = () => readMetaLeads(env, async url => ok(String(url).includes('/leads?')
+    ? {data: [newLead, lead('101')]} : {id: FORM_ID, questions}));
+  const data = await fetchLeads();
+  assert.deepEqual(data.leads[0].field_data.slice(0, 3).map(f => f.values), [[], [], []]);
+  assert.equal(Object.hasOwn(newLead.field_data[0], 'values'), false);
+  const fields = airtableFields(data.leads[0], data.labels);
+  assert.equal(fields['Név'], 'Teszt Elek'); assert.equal(fields['E-mail'], 'test@example.com');
+  assert.equal(fields['Telefon'], undefined);
+  assert.match(fields['Üzenet'], /Méretek: nem adta meg/);
+  assert.match(fields['Üzenet'], /16 lépcsőlap és homlokfal, 100 × 30 cm/);
+  const state = initialState(); state.sent['101'] = lead('101').created_time;
+  state.lastReportDay = '2026-10-22'; state.lastCutoff = '2026-10-22T22:00:00.000Z';
+  state.alerts['2026-10-24'] = {status: 'accepted', code: 'META_FIELD'};
+  const {args, calls} = harness({state, now: new Date('2026-10-24T06:00:00Z'), fetchLeads});
+  assert.deepEqual(await runDigest(args), {status: 'accepted', count: 1, reportDay: '2026-10-23'});
+  assert.deepEqual(calls.saved[0].map(l => l.id), ['202']);
+  assert.match(calls.mails[0].message.text, /Méretek: nem adta meg/);
+  assert.match(calls.mails[0].message.text, /E-mail: test@example.com/);
+  assert.equal((await runDigest(args)).status, 'already_sent');
+  assert.equal(calls.mails.length, 1);
+});
+
+test('malformed Meta fields still fail safely without logging personal data', async t => {
+  const logged = t.mock.method(console, 'error', () => {});
+  const invalid = [null, {}, [], {name: ''}, {name: '   '}, {name: 42, values: []},
+    {name: 'private-name', values: 'private-answer'}, {name: 'private-name', values: 42},
+    {name: 'private-name', values: ['private-answer', {answer: 'private-answer'}]}];
+  for (const field of invalid) {
+    await assert.rejects(readMetaLeads(env, async url => ok(String(url).includes('/leads?')
+      ? {data: [{...lead('101'), field_data: [field]}]} : {id: FORM_ID, questions: []})), /META_FIELD/);
+  }
+  assert.equal(logged.mock.callCount(), invalid.length);
+  const diagnostic = JSON.stringify(logged.mock.calls.map(c => c.arguments));
+  assert(!diagnostic.includes('private-name')); assert(!diagnostic.includes('private-answer'));
+  assert(!diagnostic.includes('101'));
+  assert.match(diagnostic, /valuesType/);
+});
 test('authorization requires a strong exact bearer token', () => {
   assert(authorized(`Bearer ${env.CRON_SECRET}`, env.CRON_SECRET));
   for (const header of [undefined, '', 'Bearer short', `Bearer ${env.CRON_SECRET}x`]) assert(!authorized(header, env.CRON_SECRET));

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {FORM_ID, START, RECIPIENTS, reportWindow, authorized, initialState, runDigest,
-  readMetaLeads, sendDigestMail, airtableFields, composeDigest} from '../lib/meta-digest.mjs';
+  readMetaLeads, sendDigestMail, airtableFields, composeDigest, replyLink, REPLY_SUBJECT} from '../lib/meta-digest.mjs';
 
 const env = {VERCEL_ENV: 'production', META_DIGEST_ENABLED: 'true', META_LEADS_ACCESS_TOKEN: 'test',
   AIRTABLE_TOKEN: 'test', AIRTABLE_BASE_ID: 'appTest', AIRTABLE_TABLE_ID: 'tblTest',
@@ -239,4 +239,21 @@ test('Mailgun submission is restricted to the two authorized recipients with tra
     assert.equal(options.body.get('v:szomex_digest_key'), 'test-key'); return ok({id: 'provider-accepted'});
   });
   assert.equal(id, 'provider-accepted');
+});
+test('each enquiry gets a reply link to its own address, in both the text and the HTML part', () => {
+  const unsafe = {id: '102', created_time: '2026-10-14T14:00:00Z', field_data: [{name: 'full_name', values: ['<b>Minta</b>']},
+    {name: 'email', values: ['a@example.com?cc=b@example.com']}]};
+  const message = composeDigest([lead('101'), unsafe], {}, reportWindow(now));
+  assert.equal(replyLink(lead('101')), `mailto:test@example.com?subject=${encodeURIComponent(REPLY_SUBJECT)}&body=Kedves%20Teszt%20Elek%21%0A%0A`);
+  assert.match(message.text, /Válasz levélben: mailto:test@example\.com\?subject=/);
+  assert.match(message.html, /<a href="mailto:test@example\.com\?subject=[^"]+&amp;body=[^"]+"/);
+  assert.equal(replyLink(unsafe), null);
+  assert.match(message.text, /Válasz levélben: nincs használható e-mail cím/);
+  assert(!message.html.includes('href="mailto:a@example.com')); assert(!message.html.includes('<b>Minta'));
+  assert.match(message.html, /&lt;b&gt;Minta&lt;\/b&gt;/);
+});
+test('the digest HTML part is sent to Mailgun next to the text part', async () => {
+  await sendDigestMail({subject: 'Test', text: 'Synthetic', html: '<p>Synthetic</p>'}, 'test-key', env, async (url, options) => {
+    assert.equal(options.body.get('text'), 'Synthetic'); assert.equal(options.body.get('html'), '<p>Synthetic</p>'); return ok({id: 'x'});
+  });
 });
